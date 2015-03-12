@@ -226,8 +226,8 @@ def prep_data(in_path, out_path=os.curdir, save_size=20, start_from=0):
         tdlist = dlist[i:i+save_size]
         data = read_mixed_from_files(dpath, tdlist)
         print 'finished reading file'
-        normalize_data(data)
-        print 'finished normalizing data'
+        #        normalize_data(data)
+        #       print 'finished normalizing data'
         # split to x second patches
         patched_data = split_music_to_patches(data, annotation,
                                               all_instruments_map)
