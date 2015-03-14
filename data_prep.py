@@ -17,12 +17,12 @@ The code in this file reads all wav files, metadata and annotations for mixed
 tracks. And then it takes patches of x seconds each from each track and labels
 them.
 Finally the resulting raw data is saved to several mat files, each containing
-x tracks.
+y tracks.
 
 WARNING: If save_size is set to 20 in prep_data(), it takes 2 to 10 min to
          read data for one mat file, 3GB memory to keep program running, and
          1.5GB disk storage to save one mat file.
-         If you find yourself out of memory, set pickle_size to a lower value.
+         If you find yourself out of memory, set save_size to a lower value.
          Still looking for more efficient ways to store data.
 
 Need discussion: Too many kinds of instruments (over 80) if use all
@@ -156,7 +156,7 @@ def match_meta_annotation(meta, annotation):
     return sorted(list(all_instruments))
 
 
-def split_music_to_patches(data, annotation, inst_map, length=5):
+def split_music_to_patches(data, annotation, inst_map, label_aggr, length=1):
     """Split each music file into (length) second patches and label each patch
 
     Note: for each music file, the last patch that is not long enough is
@@ -169,6 +169,8 @@ def split_music_to_patches(data, annotation, inst_map, length=5):
                           calculated as average confidence in this time period
         inst_map(dict): a dictionary that maps a intrument name to its correct
                         position in the sorted list of all instruments
+        label_aggr(function): a function that defines the way labels for each
+                              sample chunk is generated, default is np.mean
         length(int): length of each patch, in seconds
     Returns:
         dict: {'X': np array for X, 'y': np array for y}
@@ -180,7 +182,7 @@ def split_music_to_patches(data, annotation, inst_map, length=5):
             patch = v[:, e:patch_size+e].ravel()
             sub_df = annotation[k][(i * length <= annotation[k].time) &
                                    (annotation[k].time < (i + 1) * length)]
-            inst_conf = sub_df.mean().drop('time')
+            inst_conf = sub_df.apply(label_aggr, 0).drop('time')
             label = np.zeros(len(inst_map), dtype='float32')
             for j in inst_conf.index:
                 temp = inst_conf[j]
@@ -193,13 +195,17 @@ def split_music_to_patches(data, annotation, inst_map, length=5):
     return {'X': np.array(X), 'y': np.array(y)}
 
 
-def prep_data(in_path, out_path=os.curdir, save_size=20, start_from=0):
+def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
+              label_aggr=np.mean, start_from=0):
     """Prepare data for preprocessing
     Args:
         in_path(str): the path for "MedleyDB"
         out_path(str): the path to save pkl files, default to be current
         save_size(int): the number of wav files contained in each mat
                           file. Large save_size requires large memory
+        norm_channel(bool): whehter to normalize each channel locally
+        label_aggr(function): a function that defines the way labels for each
+                              sample chunk is generated, default is np.mean
         start_from(int): the order of file in alphebic order to start reading
                          from. All files before that are ignored. Used to
                          continue from the file last read.
@@ -226,11 +232,12 @@ def prep_data(in_path, out_path=os.curdir, save_size=20, start_from=0):
         tdlist = dlist[i:i+save_size]
         data = read_mixed_from_files(dpath, tdlist)
         print 'finished reading file'
-        #        normalize_data(data)
-        #       print 'finished normalizing data'
+        if norm_channel:
+            normalize_data(data)
+            print 'finished normalizing data'
         # split to x second patches
         patched_data = split_music_to_patches(data, annotation,
-                                              all_instruments_map)
+                                              all_instruments_map, label_aggr)
         print 'finished taking patchs of data'
         del data
         # save patches to file
