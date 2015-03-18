@@ -1,0 +1,115 @@
+,Instrument,Group 1,Group 2,Group 3,Group 4
+0,erhu,erhu,bowed,erhu,erhu
+1,violin,violin,bowed,violin,violin
+2,viola,viola,bowed,viola,viola
+3,cello,cello,bowed,cello,cello
+4,double bass,double bass,bowed,double bass,double bass
+5,violin section,violin section,bowed,violin,violin
+6,viola section,viola section,bowed,viola,viola
+7,cello section,cello section,bowed,cello,cello
+8,string section,string section,bowed,string section,string section
+9,acoustic guitar,acoustic guitar,plucked,acoustic guitar,acoustic guitar
+10,banjo,banjo,plucked,banjo,banjo
+11,guzheng,guzheng,plucked,guzheng,guzheng
+12,harp,harp,plucked,harp,harp
+13,harpsichord,harpsichord,plucked,harpsichord,harpsichord
+14,liuqin,liuqin,plucked,liuqin,liuqin
+15,mandolin,mandolin,plucked,mandolin,mandolin
+16,oud,oud,plucked,oud,oud
+17,slide guitar,slide guitar,plucked,slide guitar,slide guitar
+18,ukulele,ukulele,plucked,ukulele,ukulele
+19,zhongruan,zhongruan,plucked,zhongruan,zhongruan
+20,dulcimer,dulcimer,struck,dulcimer,dulcimer
+21,yangqin,yangqin,struck,yangqin,yangqin
+22,piano,piano,struck,piano,piano
+23,tack piano,tack piano,struck,tack piano,tack piano
+24,dizi,dizi,flutes,dizi,dizi
+25,flute,flute,flutes,flute,flute
+26,flute section,flute section,flutes,flute,flute
+27,piccolo,piccolo,flutes,piccolo,piccolo
+28,bamboo flute,bamboo flute,flutes,bamboo flute,bamboo flute
+29,panpipes,panpipes,flutes,panpipes,panpipes
+30,recorder,recorder,flutes,recorder,recorder
+31,alto saxophone,alto saxophone,single reeds,alto saxophone,alto saxophone
+32,baritone saxophone,baritone saxophone,single reeds,baritone saxophone,baritone saxophone
+33,bass clarinet,bass clarinet,single reeds,bass clarinet,bass clarinet
+34,clarinet,clarinet,single reeds,clarinet,clarinet
+35,clarinet section,clarinet section,single reeds,clarinet,clarinet
+36,tenor saxophone,tenor saxophone,single reeds,tenor saxophone,tenor saxophone
+37,soprano saxophone,soprano saxophone,single reeds,soprano saxophone,soprano saxophone
+38,oboe,oboe,double reeds,oboe,oboe
+39,english horn,english horn,double reeds,english horn,english horn
+40,bassoon,bassoon,double reeds,bassoon,bassoon
+41,bagpipe,bagpipe,double reeds,bagpipe,bagpipe
+42,trumpet,trumpet,brass,trumpet,trumpet
+43,cornet,cornet,brass,cornet,cornet
+44,trombone,trombone,brass,trombone,trombone
+45,french horn,french horn,brass,french horn,french horn
+46,euphonium,euphonium,brass,euphonium,euphonium
+47,tuba,tuba,brass,tuba,tuba
+48,brass section,brass section,brass,brass section,brass section
+49,french horn section,french horn section,brass,french horn,french horn
+50,trombone section,trombone section,brass,trombone,trombone
+51,horn section,horn section,brass,horn section,horn section
+52,trumpet section,trumpet section,brass,trumpet,trumpet
+53,harmonica,harmonica,free reeds,harmonica,harmonica
+54,concertina,concertina,free reeds,concertina,concertina
+55,accordion,accordion,free reeds,accordion,accordion
+56,bandoneon,bandoneon,free reeds,bandoneon,bandoneon
+57,harmonium,harmonium,free reeds,harmonium,harmonium
+58,pipe organ,pipe organ,free reeds,pipe organ,pipe organ
+59,melodica,melodica,free reeds,melodica,melodica
+60,male singer,male singer,voice,male vocal,voice
+61,female singer,female singer,voice,female vocal,voice
+62,male speaker,male speaker,voice,male vocal,voice
+63,female speaker,female speaker,voice,female vocal,voice
+64,male rapper,male rapper,voice,male vocal,voice
+65,female rapper,female rapper,voice,female vocal,voice
+66,beatboxing,beatboxing,voice,beatboxing,voice
+67,vocalists,vocalists,voice,vocalists,voice
+68,triangle,triangle,idiophones,triangle,triangle
+69,sleigh bells,sleigh bells,idiophones,sleigh bells,sleigh bells
+70,cowbell,cowbell,idiophones,cowbell,cowbell
+71,cabasa,cabasa,idiophones,cabasa,cabasa
+72,high hat,high hat,idiophones,high hat,high hat
+73,gong,gong,idiophones,gong,gong
+74,guiro,guiro,idiophones,guiro,guiro
+75,gu,gu,idiophones,gu,gu
+76,cymbal,cymbal,idiophones,cymbal,cymbal
+77,chimes,chimes,idiophones,chimes,chimes
+78,castanet,castanet,idiophones,castanet,castanet
+79,claps,claps,idiophones,claps,claps
+80,rattle,rattle,idiophones,rattle,rattle
+81,shaker,shaker,idiophones,shaker,shaker
+82,maracas,maracas,idiophones,maracas,maracas
+83,xylophone,xylophone,idiophones,xylophone,xylophone
+84,vibraphone,vibraphone,idiophones,vibraphone,vibraphone
+85,marimba,marimba,idiophones,marimba,marimba
+86,glockenspiel,glockenspiel,idiophones,glockenspiel,glockenspiel
+87,whistle,whistle,idiophones,whistle,whistle
+88,timpani,timpani,drums,timpani,timpani
+89,toms,toms,drums,toms,toms
+90,snare drum,snare drum,drums,snare drum,snare drum
+91,kick drum,kick drum,drums,kick drum,kick drum
+92,bass drum,bass drum,drums,bass drum,bass drum
+93,bongo,bongo,drums,bongo,bongo
+94,conga,conga,drums,conga,conga
+95,tambourine,tambourine,drums,tambourine,tambourine
+96,darbuka,darbuka,drums,darbuka,darbuka
+97,doumbek,doumbek,drums,doumbek,doumbek
+98,tabla,tabla,drums,tabla,tabla
+99,auxiliary percussion,auxiliary percussion,drums,auxiliary percussion,auxiliary percussion
+100,drum set,drum set,drums,drum set,drum set
+101,clean electric guitar,clean electric guitar,amplified,clean electric guitar,clean electric guitar
+102,distorted electric guitar,distorted electric guitar,amplified,distorted electric guitar,distorted electric guitar
+103,electric bass,electric bass,amplified,electric bass,electric bass
+104,lap steel guitar,lap steel guitar,amplified,lap steel guitar,lap steel guitar
+105,drum machine,drum machine,electronic,drum machine,drum machine
+106,electric piano,electric piano,electronic,electric piano,electric piano
+107,electronic organ,electronic organ,electronic,electronic organ,electronic organ
+108,synthesizer,synthesizer,electronic,synthesizer,synthesizer
+109,theremin,theremin,electronic,theremin,theremin
+110,fx/processed sound,fx/processed sound,electronic,fx/processed sound,fx/processed sound
+111,scratches,scratches,electronic,scratches,scratches
+112,sampler,sampler,electronic,sampler,sampler
+113,Main System,Main System,Main System,Main System,Main System
