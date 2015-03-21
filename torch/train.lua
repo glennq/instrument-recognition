@@ -115,8 +115,8 @@ parameters, gradParameters = model:getParameters()
 
 function train()
    shuffle = torch.randperm(trsize)
-   trainData.data = trainData.data:index(1, shuffle:long())
-   trainData.labels = trainData.labels:index(1, shuffle:long())
+   trainData.data = trainData.data:index(1, shuffle:long()):float()
+   trainData.labels = trainData.labels:index(1, shuffle:long()):float()
    -- epoch tracker
    epoch = epoch or 1
 

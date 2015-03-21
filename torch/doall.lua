@@ -1,4 +1,6 @@
 require 'torch'
+require 'cutorch'
+cutorch.setDevice(3)
 print '==> processing options'
 cmd = torch.CmdLine()
 cmd:text()
