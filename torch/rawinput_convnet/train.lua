@@ -9,7 +9,7 @@ save = '.'
 maxEpoch = 400
 
 optimState = {
-   learningRate = 0.01,
+   learningRate = 0.05,
    momentum = 0.95,
    learningRateDecay = 0.00001
 }
@@ -22,8 +22,10 @@ testLogger = optim.Logger(paths.concat(save, 'test.log'))
 model:float()
 criterion:float()
 
-model:cuda()
-criterion:cuda()
+if opt.type == 'cuda' then 
+  model:cuda()
+  criterion:cuda()
+end
 
 classes = {'Main System',
  'accordion',
@@ -109,44 +111,43 @@ classes = {'Main System',
  'zhongruan'}
 
 print '==> defining training procedure'
-trainData.data:float()
-trainData.labels:float()
-testData.data:float()
-testData.labels:float()
 parameters, gradParameters = model:getParameters()
 
 function train()
    shuffle = torch.randperm(trsize)
-   trainData.data = trainData.data:index(1, shuffle:long())
-   trainData.labels = trainData.labels:index(1, shuffle:long())
-
 
    -- epoch tracker
    epoch = epoch or 1
 
    -- local vars
    local time = sys.clock()
-
    -- set model to training mode (for modules that differ in training and testing, like Dropout)
    model:training()
-
-   -- shuffle at each epoch
 
    local tloss = 0
    local correct = 0
    -- do one epoch
    print('==> doing epoch on training data:')
    print("==> online epoch # " .. epoch .. ' [batchSize = ' .. batchSize .. ']')
-   for t = 1,trainData:size(),batchSize do
+   for t = 1,trainData.size,batchSize do
       -- disp progress
-      xlua.progress(t, trainData:size())
+      xlua.progress(t, trainData.size)
 
       -- create mini batch
-      local inputs = trainData.data[{{t, math.min(t+batchSize-1,trainData:size())}, {}}]
-      local targets = trainData.labels[{{t, math.min(t+batchSize-1,trainData:size())}, {}}]
+      local inputs = {}
+      local targets = {}
+      for i = t,math.min(t+batchSize-1,trainData.size) do
+         -- load new sample
+         local input = trainData.data[shuffle[i]]
+         local target = trainData.labels[shuffle[i]]
 
-      inputs = inputs:cuda()
-      targets = targets:cuda()
+         if opt.type == 'cuda' then 
+	    input = input:cuda() 
+	    target = target:cuda()
+	 end
+         table.insert(inputs, input)
+         table.insert(targets, target)
+      end
 
       -- create closure to evaluate f(X) and df/dX
       local feval = function(x)
@@ -158,42 +159,50 @@ function train()
                        -- reset gradients
                        gradParameters:zero()
 
-		       local ypred = model:forward(inputs)
-		       local loss = criterion:forward(ypred, targets)
-		       tloss = tloss + loss
+                       -- f is the average of all criterions
+                       local f = 0
 
-		       local grad_y = criterion:backward(ypred, targets)
-		       model:backward(inputs, grad_y)
+                       -- evaluate function for complete mini batch
+                       for i = 1,#inputs do
+                          -- estimate f
+                          local output = model:forward(inputs[i])
+                          local err = criterion:forward(output, targets[i])
+                          f = f + err
+			  
 
-		       correct = ypred:ge(0.5):eq(targets:ge(0.5)):sum()
+                          -- estimate df/dW
+                          local df_do = criterion:backward(output, targets[i])
+                          model:backward(inputs[i], df_do)
+
+                          -- update confusion
+			  correct = correct + output:ge(0.5):eq(targets[i]:ge(0.5)):sum()
+                       end
 
                        -- normalize gradients and f(X)
-                       gradParameters:div(batchSize)
-                       f = loss
+                       gradParameters:div(#inputs)
+		       tloss = tloss + f
+                       f = f/#inputs
 
                        -- return f and df/dX
                        return f,gradParameters
       end
-
+      
       -- optimize on current mini-batch
       optimMethod(feval, parameters, optimState)
-
-
+      
    end
-
    -- time taken
+   tloss = tloss / trainData.size
    time = sys.clock() - time
-   time = time / trainData:size()
+   time = time / trainData.size
    print("\n==> time to learn 1 sample = " .. (time*1000) .. 'ms')
-
-   -- print confusion matrix
    print("\n==> training accuracy %:")
-   print(correct / trainData:size() / noutputs * 100)
+   print(correct / trainData.size / noutputs * 100)
    print("\n==>training loss")
-   print(tloss / trainData:size())
+   print(tloss)
 
    -- update logger/plot
-   trainLogger:add{['% class accuracy (train set)'] = correct / trainData:size() / noutputs * 100, ['training loss'] = tloss / trainData:size()}
+   trainLogger:add{['% class accuracy (train set)'] = correct / trainData.size / noutputs * 100, ['training loss'] = tloss}
 
    -- save/log current net
    local filename = paths.concat(save, 'model.net')
@@ -220,40 +229,41 @@ function test()
 
    local tloss = 0
    local correct = 0
-   local testBatchSize = 8
+
       -- disp progress
-   for t = 1,testData:size(),testBatchSize do
+   for t = 1,testData.size do
       -- disp progress
-      xlua.progress(t, testData:size())
+      xlua.progress(t, testData.size)
 
-      local input = testData.data[{{t, math.min(t+testBatchSize-1,testData:size())}, {}}]
-      local target = testData.labels[{{t, math.min(t+testBatchSize-1,testData:size())}, {}}]
-
-      input = input:cuda()
-      target = target:cuda()
-
+      local input = testData.data[t]
+      local target = testData.labels[t]
+      if opt.type == 'cuda' then
+        input = input:cuda()
+        target = target:cuda()
+      end
       -- test sample
       local pred = model:forward(input)
       local loss = criterion:forward(pred, target)
       tloss = tloss + loss
-      correct = pred:ge(0.5):eq(target:ge(0.5)):sum()
+      correct = correct + pred:ge(0.5):eq(target:ge(0.5)):sum()
       -- print("\n" .. target .. "\n")
 
    end
-
+   
+   tloss = tloss / testData.size
    -- timing
    time = sys.clock() - time
-   time = time / testData:size()
+   time = time / testData.size
    print("\n==> time to test 1 sample = " .. (time*1000) .. 'ms')
 
    -- print confusion matrix
    print('\n Test Accuracy %:')
-   print(correct / testData:size() / noutputs * 100)
+   print(correct / testData.size / noutputs * 100)
    print('\ntest loss:')
-   print(tloss / testData:size())
+   print(tloss)
 
    -- update log/plot
-   testLogger:add{['% mean class accuracy (test set)'] = correct / testData:size() / noutputs * 100, ['test loss'] = tloss / testData:size()}   
+   testLogger:add{['% mean class accuracy (test set)'] = correct / testData.size / noutputs * 100, ['test loss'] = tloss}   
    -- next iteration:
 
 end
