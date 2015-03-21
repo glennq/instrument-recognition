@@ -173,7 +173,9 @@ def split_music_to_patches(data, annotation, inst_map, label_aggr, length=1):
                               sample chunk is generated, default is np.mean
         length(int): length of each patch, in seconds
     Returns:
-        dict: {'X': np array for X, 'y': np array for y}
+        dict: {'X': np array for X, 'y': np array for y, 'present': np array
+                of indicators for whether the instrument is present in the
+                track from which the patch is taken}
     """
     res = []
     patch_size = 44100 * length
@@ -184,15 +186,17 @@ def split_music_to_patches(data, annotation, inst_map, label_aggr, length=1):
                                    (annotation[k].time < (i + 1) * length)]
             inst_conf = sub_df.apply(label_aggr, 0).drop('time')
             label = np.zeros(len(inst_map), dtype='float32')
+            is_present = np.zeros(len(inst_map), dtype='float32')
             for j in inst_conf.index:
                 temp = inst_conf[j]
                 # if there are two columns of the same instrument, take maximum
                 if isinstance(temp, pd.Series):
                     temp = temp.max()
                 label[inst_map[j]] = temp
-            res.append((patch, label))
-    X, y = zip(*res)
-    return {'X': np.array(X), 'y': np.array(y)}
+                is_present[inst_map[j]] = 1.0
+            res.append((patch, label, is_present))
+    X, y, present = zip(*res)
+    return {'X': np.array(X), 'y': np.array(y), 'present': np.array(present)}
 
 
 def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
