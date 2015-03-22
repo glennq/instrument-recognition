@@ -129,6 +129,7 @@ function train()
    local tloss = 0
    local correct = 0
    local n_correct = 0
+   local exact_correct = 0
    -- do one epoch
    print('==> doing epoch on training data:')
    print("==> online epoch # " .. epoch .. ' [batchSize = ' .. batchSize .. ']')
@@ -183,6 +184,9 @@ function train()
                           -- update confusion
 			  local temp = output:ge(0.5):eq(targets[i]:ge(0.5))
 			  correct = correct + temp:sum()
+			  if temp:sum() == noutputs then
+			     exact_correct = exact_correct + 1
+			  end
 			  n_correct = n_correct + temp:cmul(presents[i]):sum()
                        end
 
@@ -209,11 +213,13 @@ function train()
    print(correct / trainData.size / noutputs * 100)
    print("\n==> training modified accuracy %:")
    print(n_correct / tr_sum * 100)
+   print("\n==> training exact match accuracy %:")
+   print(exact_correct / trainData.size * 100)
    print("\n==>training loss")
    print(tloss)
 
    -- update logger/plot
-   trainLogger:add{['% class accuracy (train set)'] = correct / trainData.size / noutputs * 100, ['training loss'] = tloss, ['% modified accuracy (train set)'] = n_correct / tr_sum * 100}
+   trainLogger:add{['% class accuracy (train set)'] = correct / trainData.size / noutputs * 100, ['training loss'] = tloss, ['% modified accuracy (train set)'] = n_correct / tr_sum * 100, ['training exact match accuracy %'] = exact_correct / trainData.size * 100}
 
    -- save/log current net
    local filename = paths.concat(save, 'model.net')
@@ -241,6 +247,7 @@ function test()
    local tloss = 0
    local correct = 0
    local n_correct = 0
+   local exact_correct = 0
 
       -- disp progress
    for t = 1,testData.size do
@@ -261,7 +268,12 @@ function test()
       tloss = tloss + loss
       local temp = pred:ge(0.5):eq(target:ge(0.5))
       correct = correct + temp:sum()
+      if temp:sum() == noutputs then
+	 exact_correct = exact_correct + 1
+      end
       n_correct = n_correct + temp:cmul(present):sum()
+      -- a more agressive modified accuracy as follows:
+      -- n_correct = n_correct + present:sum() - pred:ge(0.5):eq(target:le(0.5)):sum()
       -- print("\n" .. target .. "\n")
 
    end
@@ -277,11 +289,13 @@ function test()
    print(correct / testData.size / noutputs * 100)
    print('\ntest modified accuracy %:')
    print(n_correct / te_sum * 100)
+   print('\ntest exact match accuracy %:')
+   print(exact_correct / testData.size * 100)
    print('\ntest loss:')
    print(tloss)
 
    -- update log/plot
-   testLogger:add{['% mean class accuracy (test set)'] = correct / testData.size / noutputs * 100, ['test loss'] = tloss, ['test modified accuracy %'] = n_correct / te_sum * 100}   
+   testLogger:add{['% mean class accuracy (test set)'] = correct / testData.size / noutputs * 100, ['test loss'] = tloss, ['test modified accuracy %'] = n_correct / te_sum * 100, ['test exact match accuracy %'] = exact_correct / testData.size * 100}   
    -- next iteration:
 
 end
