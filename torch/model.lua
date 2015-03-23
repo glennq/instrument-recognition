@@ -11,11 +11,11 @@ length = 44100
 ninputs = nfeats*length
 
 -- hidden units, filter sizes (for ConvNet only):
-nstates = {64,64,400}
-filtsize = {401, 435}
-poolsize = {16, 12}
-stridesize = {8, 6}
-viewsize = 836
+nstates = {10,10,10}
+filtsize = {101, 401}
+poolsize = {10, 10}
+stridesize = {10, 10}
+viewsize = 400
 
 print '==> construct model'
 
