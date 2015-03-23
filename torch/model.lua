@@ -3,7 +3,7 @@ require 'nn'      -- provides all sorts of trainable modules/layers
 require 'cunn'
 
 noutputs = 82
-batchSize = 16
+batchSize = 1
 
 -- input dimensions
 nfeats = 2
@@ -12,10 +12,10 @@ ninputs = nfeats*length
 
 -- hidden units, filter sizes (for ConvNet only):
 nstates = {64,64,400}
-filtsize = {401, 435}
-poolsize = {16, 12}
-stridesize = {8, 6}
-viewsize = 836
+filtsize = {401, 301}
+poolsize = {10, 10}
+stridesize = {10, 10}
+viewsize = 407
 
 print '==> construct model'
 
