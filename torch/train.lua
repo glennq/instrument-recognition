@@ -31,9 +31,9 @@ print '==> defining training procedure'
 parameters, gradParameters = model:getParameters()
 
 function train()
-   --shuffle = torch.randperm(trsize)
-   --trainData.data = trainData.data:index(1, shuffle:long()):float()
-   --trainData.labels = trainData.labels:index(1, shuffle:long()):float()
+   shuffle = torch.randperm(trsize)
+   trainData.data = trainData.data:index(1, shuffle:long()):float()
+   trainData.labels = trainData.labels:index(1, shuffle:long()):float()
    -- epoch tracker
    epoch = epoch or 1
    -- local vars
@@ -68,7 +68,7 @@ function train()
       local out_predict = output:ge(0.5)
       tloss = tloss + loss
       correct = correct + output:ge(0.5):eq(targets:ge(0.5)):sum()
-      exact_correct = exact_correct + (out_predict:eq(targets:ge(0.5)):sum(2)/82):eq(1):sum()
+      exact_correct = exact_correct + (out_predict:eq(targets:ge(0.5)):sum(2)):ge(82):sum()
       model:backward(inputs, criterion:backward(output, targets))
       clr = optimState.learningRate * (1-optimState.learningRateDecay)^epoch
       parameters:add(-clr, gradParameters)
@@ -134,7 +134,7 @@ function test()
       local out_predict = pred:ge(0.5)
       tloss = tloss + loss
       correct = correct + pred:ge(0.5):eq(target:ge(0.5)):sum()
-      exact_correct = exact_correct + (out_predict:eq(target:ge(0.5)):sum(2)/82):eq(1):sum()
+      exact_correct = exact_correct + (out_predict:eq(target:ge(0.5)):sum(2)/):ge(82):sum()
       -- print("\n" .. target .. "\n")
 
    end
