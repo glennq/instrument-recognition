@@ -43,6 +43,7 @@ function train()
    
    local tloss = 0
    local correct = 0
+   local exact_correct = 0
    -- do one epoch
    print('==> doing epoch on training data:')
    print("==> online epoch # " .. epoch .. ' [batchSize = ' .. batchSize .. ']')
@@ -64,8 +65,10 @@ function train()
       end
       local output = model:forward(inputs)
       local loss = criterion:forward(output, targets)
+      local out_predict = output:ge(0.5)
       tloss = tloss + loss
       correct = correct + output:ge(0.5):eq(targets:ge(0.5)):sum()
+      exact_correct = exact_correct + (out_predict:eq(targets:ge(0.5)):sum(2)/82):eq(1):sum()
       model:backward(inputs, criterion:backward(output, targets))
       clr = optimState.learningRate * (1-optimState.learningRateDecay)^epoch
       parameters:add(-clr, gradParameters)
@@ -78,6 +81,8 @@ function train()
    print("\n==> time to learn 1 sample = " .. (time*1000) .. 'ms')
    print("\n==> training accuracy %:")
    print(correct / trainData.size / noutputs * 100)
+   print("\n==> exact training accuracy %")
+   print(exact_correct / trainData.size * 100) 
    print("\n==>training loss")
    print(tloss / trainData.size)
 
@@ -110,6 +115,7 @@ function test()
 
    local tloss = 0
    local correct = 0
+   local exact_correct = 0 
    local testBatchSize = 8
       -- disp progress
    for t = 1,testData.size,testBatchSize do
@@ -125,8 +131,10 @@ function test()
       -- test sample
       local pred = model:forward(input)
       local loss = criterion:forward(pred, target)
+      local out_predict = pred:ge(0.5)
       tloss = tloss + loss
-      correct = pred:ge(0.5):eq(target:ge(0.5)):sum()
+      correct = correct + pred:ge(0.5):eq(target:ge(0.5)):sum()
+      exact_correct = exact_correct + (out_predict:eq(target:ge(0.5)):sum(2)/82):eq(1):sum()
       -- print("\n" .. target .. "\n")
 
    end
@@ -139,6 +147,8 @@ function test()
    -- print confusion matrix
    print('\n Test Accuracy %:')
    print(correct / testData.size / noutputs * 100)
+   print("\n==> exact testing accuracy %")
+   print(exact_correct / testData.size * 100)
    print('\ntest loss:')
    print(tloss / testData.size)
 
