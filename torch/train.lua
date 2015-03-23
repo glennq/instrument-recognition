@@ -32,8 +32,6 @@ parameters, gradParameters = model:getParameters()
 
 function train()
    shuffle = torch.randperm(trsize)
-   trainData.data = trainData.data:index(1, shuffle:long()):float()
-   trainData.labels = trainData.labels:index(1, shuffle:long()):float()
    -- epoch tracker
    epoch = epoch or 1
    -- local vars
@@ -52,11 +50,11 @@ function train()
       xlua.progress(t, trainData.size)
       -- create mini batch
       if batchSize == 1 then
-        inputs = trainData.data[{{t},{}}]
-        targets = trainData.labels[{{t},{}}]
+        inputs = trainData.data[{{shuffle[t]},{}}]
+        targets = trainData.labels[{{shuffle[t]},{}}]
       else
-        inputs = trainData.data[{{t, math.min(t+batchSize-1,trainData.size)}, {}}]
-        targets = trainData.labels[{{t, math.min(t+batchSize-1,trainData.size)}, {}}]
+        inputs = trainData.data[{{shuffle[t], shuffle[math.min(t+batchSize-1,trainData.size)]}, {}}]
+        targets = trainData.labels[{{shuffle[t], shuffle[math.min(t+batchSize-1,trainData.size)]}, {}}]
       end
       gradParameters:zero()
       if opt.type == 'cuda' then
