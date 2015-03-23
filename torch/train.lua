@@ -134,7 +134,7 @@ function test()
       local out_predict = pred:ge(0.5)
       tloss = tloss + loss
       correct = correct + pred:ge(0.5):eq(target:ge(0.5)):sum()
-      exact_correct = exact_correct + (out_predict:eq(target:ge(0.5)):sum(2)/):ge(82):sum()
+      exact_correct = exact_correct + (out_predict:eq(target:ge(0.5)):sum(2)):ge(82):sum()
       -- print("\n" .. target .. "\n")
 
    end
