@@ -12,10 +12,10 @@ ninputs = nfeats*length
 
 -- hidden units, filter sizes (for ConvNet only):
 nstates = {64,64,400}
-filtsize = {401, 301}
-poolsize = {10, 10}
-stridesize = {10, 10}
-viewsize = 407
+filtsize = {401, 435}
+poolsize = {16, 12}
+stridesize = {8, 6}
+viewsize = 836
 
 print '==> construct model'
 
@@ -40,8 +40,6 @@ model:add(nn.ReLU())
 -- stage 4:
 model:add(nn.Linear(nstates[3], noutputs))
 model:add(nn.Sigmoid())
-
 -- loss:
 criterion = nn.BCECriterion()
-
 

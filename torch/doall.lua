@@ -5,7 +5,8 @@ print '==> processing options'
 cmd = torch.CmdLine()
 cmd:text()
 cmd:text('Options:')
-cmd:option('-type','float','type: float | cuda')
+cmd:option('-type','cuda','type: float | cuda')
+cmd:option('-save','False','save: False | True')
 cmd:text()
 opt = cmd:parse(arg or {})
 
@@ -15,7 +16,8 @@ print '==> executing all'
 
 dofile 'data.lua'
 dofile 'model.lua'
-dofile 'train.lua'
+dofile 'class.lua'
+dofile 'train_opt.lua'
 
 epoch = 1
 

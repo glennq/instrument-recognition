@@ -28,6 +28,7 @@ if opt.type == 'cuda' then
 end
 
 print '==> defining training procedure'
+parameters, gradParameters = model:getParameters()
 
 function train()
    --shuffle = torch.randperm(trsize)
@@ -40,7 +41,6 @@ function train()
    -- set model to training mode (for modules that differ in training and testing, like Dropout)
    model:training()
    
-   local parameters, gradParameters = model:getParameters()
    local tloss = 0
    local correct = 0
    -- do one epoch
@@ -62,13 +62,20 @@ function train()
         inputs = inputs:cuda()
         targets = targets:cuda()
       end
-      local output = model:forward(inputs)
-      local loss = criterion:forward(output, targets)
-      tloss = tloss + loss
-      correct = output:ge(0.5):eq(targets:ge(0.5)):sum()
-      model:backward(inputs, criterion:backward(output, targets))
-      clr = optimState.learningRate * (1-optimState.learningRateDecay)^epoch
-      parameters:add(-clr, gradParameters)
+      local feval = function(x)
+        if x ~= parameters then
+          parameters:copy(x)
+        end
+        gradParameters = gradParameters:zero()
+        local f = 0
+        local output = model:forward(inputs)
+        local loss = criterion:forward(output, targets)
+        f = f + loss
+        model:backward(inputs, criterion:backward(output, targets))
+        correct = output:ge(0.5):eq(targets:ge(0.5)):sum()
+        return f, gradParameters
+      end
+      optimMethod(feval, parameters, optimState)
       collectgarbage()
     end
 
