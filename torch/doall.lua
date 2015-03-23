@@ -17,7 +17,7 @@ print '==> executing all'
 dofile 'data.lua'
 dofile 'model.lua'
 dofile 'class.lua'
-dofile 'train_opt.lua'
+dofile 'train.lua'
 
 epoch = 1
 

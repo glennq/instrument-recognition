@@ -3,7 +3,7 @@ require 'nn'      -- provides all sorts of trainable modules/layers
 require 'cunn'
 
 noutputs = 82
-batchSize = 1
+batchSize = 64
 
 -- input dimensions
 nfeats = 2
