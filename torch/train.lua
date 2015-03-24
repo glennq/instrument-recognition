@@ -31,7 +31,7 @@ print '==> defining training procedure'
 parameters, gradParameters = model:getParameters()
 
 function train()
-   shuffle = torch.randperm(trsize)
+   --shuffle = torch.randperm(trsize)
    -- epoch tracker
    epoch = epoch or 1
    -- local vars
@@ -53,8 +53,10 @@ function train()
         inputs = trainData.data[{{shuffle[t]},{}}]
         targets = trainData.labels[{{shuffle[t]},{}}]
       else
-        inputs = trainData.data[{{shuffle[t], shuffle[math.min(t+batchSize-1,trainData.size)]}, {}}]
-        targets = trainData.labels[{{shuffle[t], shuffle[math.min(t+batchSize-1,trainData.size)]}, {}}]
+        --inputs = trainData.data[{{shuffle[{{t, math.min(t+batchSize-1,trainData.size)}}]}, {}}]
+        inputs = trainData.data[{{t, math.min(t+batchSize-1, trainData.size)},{}}]
+        targets = trainData.labels[{{t, math.min(t+batchSize-1, trainData.size)},{}}]
+        --targets = trainData.labels[{{shuffle[{{t, math.min(t+batchSize-1,trainData.size)}}]}, {}}]
       end
       gradParameters:zero()
       if opt.type == 'cuda' then
@@ -132,7 +134,7 @@ function test()
       local out_predict = pred:ge(0.5)
       tloss = tloss + loss
       correct = correct + pred:ge(0.5):eq(target:ge(0.5)):sum()
-      exact_correct = exact_correct + (out_predict:eq(target:ge(0.5)):sum(2)/):ge(82):sum()
+      exact_correct = exact_correct + (out_predict:eq(target:ge(0.5)):sum(2)):ge(82):sum()
       -- print("\n" .. target .. "\n")
 
    end
@@ -146,7 +148,7 @@ function test()
    print('\n Test Accuracy %:')
    print(correct / testData.size / noutputs * 100)
    print("\n==> exact testing accuracy %")
-   print(exact_correct / testData.size * 100)
+   print(exact_correct)
    print('\ntest loss:')
    print(tloss / testData.size)
 
