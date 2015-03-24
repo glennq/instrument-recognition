@@ -133,27 +133,23 @@ def read_meta_data(path, pickle_file=None):
         with open(pickle_file, 'w') as f:
             cPickle.dump(res, f)
     return res
-    
+
+
 def groupMetaData(meta, instGroup):
-    """
-    Match instrument number in annotation with real instrument name in meta.
-
+    """Match instrument number in annotation with real instrument name in meta.
     Args:
-    meta (dict): in the format of {song_name(string): instrument_map(dict)}
-    instrument_map is of the format eg: {'S01': 'piano'}
-    instGroup (dict): {instrument: instrumentGroup} eg: {'piano': 'struck'}
-
+        meta (dict): in the format of {song_name(string): instrument_map(dict)}
+                     instrument_map is of the format eg: {'S01': 'piano'}
+        instGroup (dict): {instrument: instrumentGroup} eg: {'piano': 'struck'}
     Returns:
-    groupedMeta (dict): in the format of {song_name(string): instrument_map(dict)}
+        groupedMeta (dict): in the format of
+                            {song_name(string): instrument_map(dict)}
     """
     groupedMeta = copy.deepcopy(meta)
-
     for songName in groupedMeta.keys():
-
         for stemName in groupedMeta[songName]:
-
-            groupedMeta[songName][stemName] = instGroup[groupedMeta[songName][stemName]]
-
+            groupedMeta[songName][stemName] = instGroup[groupedMeta[songName]
+                                                        [stemName]]
     return groupedMeta
 
 
@@ -223,7 +219,7 @@ def split_music_to_patches(data, annotation, inst_map, label_aggr, length=1):
 
 
 def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
-              label_aggr=np.mean, start_from=0, groupID = 'Group 4'):
+              label_aggr=np.mean, start_from=0, groupID='Group 4'):
     """Prepare data for preprocessing
     Args:
         in_path(str): the path for "MedleyDB"
@@ -244,12 +240,13 @@ def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
     anno_pkl = os.path.join(out_path, 'anno_label.pkl')
     annotation = read_activation_confs(in_path)
     meta = read_meta_data(in_path)
-    
+
     # group instruments in metadata
     instGrouping = pd.read_csv('./instGroup.csv')
-    groupLookup = dict(zip(instGrouping['Instrument'].values,instGrouping[groupID].values))
+    groupLookup = dict(zip(instGrouping['Instrument'].values,
+                           instGrouping[groupID].values))
     meta = groupMetaData(meta, groupLookup)
-    
+
     all_instruments = match_meta_annotation(meta, annotation)
     if not os.path.exists(anno_pkl):
         with open(anno_pkl, 'w') as f:
@@ -257,6 +254,7 @@ def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
 
     # get a dictionary mapping all instrument to sorted order
     all_instruments_map = {e: i for i, e in enumerate(all_instruments)}
+    print 'Total number of labels = {}'.format(len(all_instruments))
 
     # read mixed tracks
     dpath = os.path.join(in_path, "Audio")
