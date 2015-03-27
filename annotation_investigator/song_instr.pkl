@@ -1,0 +1,2012 @@
+(dp1
+S'Phoenix_SeanCaughlinsTheScartaglen'
+p2
+c__builtin__
+set
+p3
+((lp4
+S'mandolin'
+p5
+aS'violin'
+p6
+aS'electric bass'
+p7
+aS'acoustic guitar'
+p8
+atRp9
+sS'Handel_TornamiAVagheggiar'
+p10
+g3
+((lp11
+S'female singer'
+p12
+aS'piano'
+p13
+atRp14
+sS'CroqueMadame_Oil'
+p15
+g3
+((lp16
+S'drum set'
+p17
+aS'piano'
+p18
+aS'clean electric guitar'
+p19
+aS'double bass'
+p20
+atRp21
+sS'MusicDelta_Britpop'
+p22
+g3
+((lp23
+S'drum set'
+p24
+aS'clean electric guitar'
+p25
+aS'electric bass'
+p26
+aS'distorted electric guitar'
+p27
+aS'female singer'
+p28
+atRp29
+sS'MusicDelta_Punk'
+p30
+g3
+((lp31
+S'drum set'
+p32
+aS'male singer'
+p33
+aS'electric bass'
+p34
+aS'distorted electric guitar'
+p35
+atRp36
+sS'MusicDelta_LatinJazz'
+p37
+g3
+((lp38
+S'drum set'
+p39
+aS'trumpet'
+p40
+aS'electric bass'
+p41
+aS'electric piano'
+p42
+aS'flute'
+p43
+atRp44
+sS'MusicDelta_FreeJazz'
+p45
+g3
+((lp46
+S'drum set'
+p47
+aS'bass clarinet'
+p48
+aS'double bass'
+p49
+atRp50
+sS'AvaLuna_Waterduct'
+p51
+g3
+((lp52
+S'male singer'
+p53
+aS'electric bass'
+p54
+aS'vocalists'
+p55
+aS'drum set'
+p56
+aS'fx/processed sound'
+p57
+aS'vibraphone'
+p58
+aS'synthesizer'
+p59
+aS'distorted electric guitar'
+p60
+atRp61
+sS'MusicDelta_ChineseJiangNan'
+p62
+g3
+((lp63
+S'guzheng'
+p64
+aS'dizi'
+p65
+aS'zhongruan'
+p66
+aS'erhu'
+p67
+aS'yangqin'
+p68
+atRp69
+sS'MusicDelta_Rock'
+p70
+g3
+((lp71
+S'drum set'
+p72
+aS'clean electric guitar'
+p73
+aS'male singer'
+p74
+aS'electric bass'
+p75
+atRp76
+sS'FamilyBand_Again'
+p77
+g3
+((lp78
+S'electric bass'
+p79
+aS'vocalists'
+p80
+aS'acoustic guitar'
+p81
+aS'drum set'
+p82
+aS'melodica'
+p83
+aS'distorted electric guitar'
+p84
+aS'female singer'
+p85
+aS'auxiliary percussion'
+p86
+aS'clean electric guitar'
+p87
+aS'lap steel guitar'
+p88
+atRp89
+sS'TablaBreakbeatScience_PhaseTransition'
+p90
+g3
+((lp91
+S'electric bass'
+p92
+aS'accordion'
+p93
+aS'mandolin'
+p94
+aS'fx/processed sound'
+p95
+aS'synthesizer'
+p96
+aS'drum machine'
+p97
+aS'tabla'
+p98
+atRp99
+sS'TablaBreakbeatScience_Vger'
+p100
+g3
+((lp101
+S'clean electric guitar'
+p102
+aS'drum machine'
+p103
+aS'accordion'
+p104
+aS'mandolin'
+p105
+aS'fx/processed sound'
+p106
+aS'synthesizer'
+p107
+aS'auxiliary percussion'
+p108
+aS'tabla'
+p109
+atRp110
+sS'MatthewEntwistle_TheArch'
+p111
+g3
+((lp112
+S'gong'
+p113
+aS'cello section'
+p114
+aS'violin section'
+p115
+aS'piccolo'
+p116
+aS'viola section'
+p117
+aS'fx/processed sound'
+p118
+aS'trombone section'
+p119
+aS'bamboo flute'
+p120
+aS'trumpet section'
+p121
+aS'cymbal'
+p122
+aS'synthesizer'
+p123
+aS'flute section'
+p124
+aS'french horn section'
+p125
+aS'piano'
+p126
+atRp127
+sS'MusicDelta_ChineseDrama'
+p128
+g3
+((lp129
+S'guzheng'
+p130
+aS'dizi'
+p131
+aS'zhongruan'
+p132
+aS'erhu'
+p133
+aS'yangqin'
+p134
+atRp135
+sS'MusicDelta_ChineseYaoZu'
+p136
+g3
+((lp137
+S'guzheng'
+p138
+aS'dizi'
+p139
+aS'auxiliary percussion'
+p140
+aS'erhu'
+p141
+aS'yangqin'
+p142
+atRp143
+sS'MusicDelta_FusionJazz'
+p144
+g3
+((lp145
+S'soprano saxophone'
+p146
+aS'electric bass'
+p147
+aS'electric piano'
+p148
+aS'drum set'
+p149
+aS'synthesizer'
+p150
+aS'trumpet'
+p151
+atRp152
+sS'MatthewEntwistle_FairerHopes'
+p153
+g3
+((lp154
+S'gong'
+p155
+aS'cello section'
+p156
+aS'violin section'
+p157
+aS'flute'
+p158
+aS'cymbal'
+p159
+aS'double bass'
+p160
+aS'string section'
+p161
+aS'french horn'
+p162
+aS'bass drum'
+p163
+aS'harp'
+p164
+aS'piano'
+p165
+aS'clarinet section'
+p166
+atRp167
+sS'Wolf_DieBekherte'
+p168
+g3
+((lp169
+S'female singer'
+p170
+aS'piano'
+p171
+atRp172
+sS'AlexanderRoss_VelvetCurtain'
+p173
+g3
+((lp174
+S'male singer'
+p175
+aS'electric bass'
+p176
+aS'vocalists'
+p177
+aS'acoustic guitar'
+p178
+aS'drum set'
+p179
+aS'brass section'
+p180
+aS'string section'
+p181
+aS'clean electric guitar'
+p182
+atRp183
+sS'MusicDelta_Vivaldi'
+p184
+g3
+((lp185
+S'violin section'
+p186
+aS'double bass'
+p187
+aS'cello'
+p188
+aS'viola section'
+p189
+atRp190
+sS'MusicDelta_Reggae'
+p191
+g3
+((lp192
+S'drum set'
+p193
+aS'clean electric guitar'
+p194
+aS'male singer'
+p195
+aS'electric bass'
+p196
+atRp197
+sS'StrandOfOaks_Spacestation'
+p198
+g3
+((lp199
+S'male singer'
+p200
+aS'electric bass'
+p201
+aS'vocalists'
+p202
+aS'drum set'
+p203
+aS'tack piano'
+p204
+aS'synthesizer'
+p205
+aS'piano'
+p206
+aS'auxiliary percussion'
+p207
+atRp208
+sS'MatthewEntwistle_ImpressionsOfSaturn'
+p209
+g3
+((lp210
+S'violin'
+p211
+aS'piano'
+p212
+aS'fx/processed sound'
+p213
+aS'viola'
+p214
+aS'cello'
+p215
+atRp216
+sS'Grants_PunchDrunk'
+p217
+g3
+((lp218
+S'electric bass'
+p219
+aS'male rapper'
+p220
+aS'fx/processed sound'
+p221
+aS'sampler'
+p222
+aS'piano'
+p223
+aS'drum machine'
+p224
+atRp225
+sS'HezekiahJones_BorrowedHeart'
+p226
+g3
+((lp227
+S'male singer'
+p228
+aS'electric bass'
+p229
+aS'vocalists'
+p230
+aS'acoustic guitar'
+p231
+aS'drum set'
+p232
+aS'vibraphone'
+p233
+aS'cymbal'
+p234
+aS'violin section'
+p235
+aS'auxiliary percussion'
+p236
+aS'banjo'
+p237
+aS'lap steel guitar'
+p238
+atRp239
+sS'MusicDelta_Beatles'
+p240
+g3
+((lp241
+S'male singer'
+p242
+aS'electric bass'
+p243
+aS'acoustic guitar'
+p244
+aS'drum set'
+p245
+aS'female singer'
+p246
+aS'clean electric guitar'
+p247
+atRp248
+sS'Phoenix_ScotchMorris'
+p249
+g3
+((lp250
+S'violin'
+p251
+aS'flute'
+p252
+aS'acoustic guitar'
+p253
+atRp254
+sS'AmarLal_Rest'
+p255
+g3
+((lp256
+S'clean electric guitar'
+p257
+aS'fx/processed sound'
+p258
+atRp259
+sS'TheScarletBrand_LesFleursDuMal'
+p260
+g3
+((lp261
+S'male singer'
+p262
+aS'electric bass'
+p263
+aS'drum set'
+p264
+aS'fx/processed sound'
+p265
+aS'distorted electric guitar'
+p266
+aS'clean electric guitar'
+p267
+atRp268
+sS'Mozart_BesterJungling'
+p269
+g3
+((lp270
+S'female singer'
+p271
+aS'piano'
+p272
+atRp273
+sS'Schubert_Erstarrung'
+p274
+g3
+((lp275
+S'male singer'
+p276
+aS'piano'
+p277
+atRp278
+sS'JoelHelander_Definition'
+p279
+g3
+((lp280
+S'chimes'
+p281
+aS'viola'
+p282
+aS'bassoon'
+p283
+aS'flute'
+p284
+aS'trombone'
+p285
+aS'string section'
+p286
+aS'cello'
+p287
+aS'french horn'
+p288
+aS'violin'
+p289
+aS'piano'
+p290
+aS'snare drum'
+p291
+aS'trumpet'
+p292
+aS'horn section'
+p293
+atRp294
+sS'Phoenix_ColliersDaughter'
+p295
+g3
+((lp296
+S'violin'
+p297
+aS'electric bass'
+p298
+aS'flute'
+p299
+aS'acoustic guitar'
+p300
+atRp301
+sS'ClaraBerryAndWooldog_TheBadGuys'
+p302
+g3
+((lp303
+S'female singer'
+p304
+aS'piano'
+p305
+atRp306
+sS'MusicDelta_Pachelbel'
+p307
+g3
+((lp308
+S'violin'
+p309
+aS'viola'
+p310
+aS'cello'
+p311
+atRp312
+sS'TablaBreakbeatScience_CaptainSky'
+p313
+g3
+((lp314
+S'drum set'
+p315
+aS'electric bass'
+p316
+aS'tabla'
+p317
+atRp318
+sS'ClaraBerryAndWooldog_Boys'
+p319
+g3
+((lp320
+S'brass section'
+p321
+aS'vocalists'
+p322
+aS'drum set'
+p323
+aS'timpani'
+p324
+aS'tack piano'
+p325
+aS'tenor saxophone'
+p326
+aS'female singer'
+p327
+aS'piano'
+p328
+aS'snare drum'
+p329
+atRp330
+sS'MusicDelta_ChineseChaoZhou'
+p331
+g3
+((lp332
+S'guzheng'
+p333
+aS'dizi'
+p334
+aS'erhu'
+p335
+aS'yangqin'
+p336
+atRp337
+sS'TablaBreakbeatScience_Animoog'
+p338
+g3
+((lp339
+S'electric bass'
+p340
+aS'drum machine'
+p341
+aS'fx/processed sound'
+p342
+aS'tabla'
+p343
+aS'distorted electric guitar'
+p344
+atRp345
+sS'EthanHein_GirlOnABridge'
+p346
+g3
+((lp347
+S'synthesizer'
+p348
+aS'piano'
+p349
+aS'auxiliary percussion'
+p350
+aS'string section'
+p351
+aS'clean electric guitar'
+p352
+atRp353
+sS'SecretMountains_HighHorse'
+p354
+g3
+((lp355
+S'electric bass'
+p356
+aS'vocalists'
+p357
+aS'drum set'
+p358
+aS'fx/processed sound'
+p359
+aS'cymbal'
+p360
+aS'synthesizer'
+p361
+aS'female singer'
+p362
+aS'piano'
+p363
+aS'clean electric guitar'
+p364
+atRp365
+sS'Lushlife_ToynbeeSuite'
+p366
+g3
+((lp367
+S'clean electric guitar'
+p368
+aS'electric bass'
+p369
+aS'male rapper'
+p370
+aS'drum set'
+p371
+aS'brass section'
+p372
+aS'fx/processed sound'
+p373
+aS'trumpet section'
+p374
+aS'synthesizer'
+p375
+aS'string section'
+p376
+aS'scratches'
+p377
+aS'claps'
+p378
+aS'clarinet'
+p379
+aS'drum machine'
+p380
+aS'glockenspiel'
+p381
+aS'piano'
+p382
+aS'horn section'
+p383
+atRp384
+sS'Schumann_Mignon'
+p385
+g3
+((lp386
+S'female singer'
+p387
+aS'piano'
+p388
+atRp389
+sS'Meaxic_TakeAStep'
+p390
+g3
+((lp391
+S'male singer'
+p392
+aS'electric bass'
+p393
+aS'vocalists'
+p394
+aS'drum set'
+p395
+aS'distorted electric guitar'
+p396
+aS'clean electric guitar'
+p397
+atRp398
+sS'MatthewEntwistle_DontYouEver'
+p399
+g3
+((lp400
+S'male singer'
+p401
+aS'drum set'
+p402
+aS'brass section'
+p403
+aS'violin section'
+p404
+aS'double bass'
+p405
+aS'piano'
+p406
+atRp407
+sS'KarimDouaidy_Yatora'
+p408
+g3
+((lp409
+S'electric bass'
+p410
+aS'auxiliary percussion'
+p411
+aS'piano'
+p412
+aS'acoustic guitar'
+p413
+aS'oud'
+p414
+atRp415
+sS'AimeeNorwich_Child'
+p416
+g3
+((lp417
+S'electric bass'
+p418
+aS'vocalists'
+p419
+aS'acoustic guitar'
+p420
+aS'drum set'
+p421
+aS'female singer'
+p422
+aS'piano'
+p423
+aS'clean electric guitar'
+p424
+atRp425
+sS'NightPanther_Fire'
+p426
+g3
+((lp427
+S'male singer'
+p428
+aS'electric bass'
+p429
+aS'vocalists'
+p430
+aS'drum set'
+p431
+aS'brass section'
+p432
+aS'synthesizer'
+p433
+aS'string section'
+p434
+aS'auxiliary percussion'
+p435
+aS'drum machine'
+p436
+atRp437
+sS'TablaBreakbeatScience_RockSteady'
+p438
+g3
+((lp439
+S'mandolin'
+p440
+aS'drum machine'
+p441
+aS'tabla'
+p442
+aS'accordion'
+p443
+atRp444
+sS'MusicDelta_Shadows'
+p445
+g3
+((lp446
+S'drum set'
+p447
+aS'clean electric guitar'
+p448
+aS'electric bass'
+p449
+atRp450
+sS'HeladoNegro_MitadDelMundo'
+p451
+g3
+((lp452
+S'male singer'
+p453
+aS'fx/processed sound'
+p454
+aS'tack piano'
+p455
+aS'synthesizer'
+p456
+aS'vibraphone'
+p457
+aS'drum machine'
+p458
+atRp459
+sS'ChrisJacoby_BoothShotLincoln'
+p460
+g3
+((lp461
+S'mandolin'
+p462
+aS'clean electric guitar'
+p463
+aS'drum machine'
+p464
+aS'tabla'
+p465
+atRp466
+sS'FacesOnFilm_WaitingForGa'
+p467
+g3
+((lp468
+S'male singer'
+p469
+aS'electric bass'
+p470
+aS'vocalists'
+p471
+aS'acoustic guitar'
+p472
+aS'drum set'
+p473
+aS'vibraphone'
+p474
+aS'synthesizer'
+p475
+aS'distorted electric guitar'
+p476
+aS'auxiliary percussion'
+p477
+aS'clean electric guitar'
+p478
+atRp479
+sS'MusicDelta_GriegTrolltog'
+p480
+g3
+((lp481
+S'brass section'
+p482
+aS'cello'
+p483
+aS'viola section'
+p484
+aS'violin section'
+p485
+aS'piccolo'
+p486
+aS'oboe'
+p487
+aS'trumpet section'
+p488
+aS'tuba'
+p489
+aS'cymbal'
+p490
+aS'timpani'
+p491
+aS'double bass'
+p492
+aS'flute section'
+p493
+aS'clarinet section'
+p494
+atRp495
+sS'MusicDelta_Gospel'
+p496
+g3
+((lp497
+S'drum set'
+p498
+aS'clean electric guitar'
+p499
+aS'claps'
+p500
+aS'electric bass'
+p501
+aS'female singer'
+p502
+atRp503
+sS'MusicDelta_Disco'
+p504
+g3
+((lp505
+S'drum set'
+p506
+aS'clean electric guitar'
+p507
+aS'male singer'
+p508
+aS'electric bass'
+p509
+atRp510
+sS'Meaxic_YouListen'
+p511
+g3
+((lp512
+S'male singer'
+p513
+aS'electric bass'
+p514
+aS'vocalists'
+p515
+aS'acoustic guitar'
+p516
+aS'drum set'
+p517
+aS'distorted electric guitar'
+p518
+aS'clean electric guitar'
+p519
+atRp520
+sS'HopAlong_SisterCities'
+p521
+g3
+((lp522
+S'electric bass'
+p523
+aS'vocalists'
+p524
+aS'acoustic guitar'
+p525
+aS'drum set'
+p526
+aS'synthesizer'
+p527
+aS'distorted electric guitar'
+p528
+aS'female singer'
+p529
+atRp530
+sS'MusicDelta_SwingJazz'
+p531
+g3
+((lp532
+S'drum set'
+p533
+aS'piano'
+p534
+aS'double bass'
+p535
+aS'clarinet'
+p536
+atRp537
+sS'TablaBreakbeatScience_MoodyPlucks'
+p538
+g3
+((lp539
+S'clean electric guitar'
+p540
+aS'fx/processed sound'
+p541
+aS'synthesizer'
+p542
+aS'drum machine'
+p543
+aS'tabla'
+p544
+aS'harp'
+p545
+atRp546
+sS'BigTroubles_Phantom'
+p547
+g3
+((lp548
+S'drum set'
+p549
+aS'male singer'
+p550
+aS'electric bass'
+p551
+aS'distorted electric guitar'
+p552
+atRp553
+sS'BrandonWebster_DontHearAThing'
+p554
+g3
+((lp555
+S'male speaker'
+p556
+aS'female singer'
+p557
+aS'piano'
+p558
+atRp559
+sS'Snowmine_Curfews'
+p560
+g3
+((lp561
+S'clean electric guitar'
+p562
+aS'male singer'
+p563
+aS'electric bass'
+p564
+aS'vocalists'
+p565
+aS'drum set'
+p566
+aS'vibraphone'
+p567
+aS'synthesizer'
+p568
+aS'tack piano'
+p569
+aS'sampler'
+p570
+aS'auxiliary percussion'
+p571
+atRp572
+sS'MatthewEntwistle_AnEveningWithOliver'
+p573
+g3
+((lp574
+S'viola'
+p575
+aS'bongo'
+p576
+aS'vocalists'
+p577
+aS'oboe'
+p578
+aS'bassoon'
+p579
+aS'flute'
+p580
+aS'violin section'
+p581
+aS'double bass'
+p582
+aS'cello'
+p583
+aS'violin'
+p584
+aS'french horn section'
+p585
+aS'clarinet'
+p586
+aS'glockenspiel'
+p587
+aS'piano'
+p588
+aS'harp'
+p589
+atRp590
+sS'MusicDelta_Beethoven'
+p591
+g3
+((lp592
+S'timpani'
+p593
+aS'viola'
+p594
+aS'oboe'
+p595
+aS'violin section'
+p596
+aS'flute'
+p597
+aS'bassoon'
+p598
+aS'double bass'
+p599
+aS'cello'
+p600
+aS'french horn'
+p601
+aS'clarinet'
+p602
+aS'trumpet'
+p603
+atRp604
+sS'PurlingHiss_Lolita'
+p605
+g3
+((lp606
+S'drum set'
+p607
+aS'electric bass'
+p608
+aS'vocalists'
+p609
+aS'distorted electric guitar'
+p610
+aS'S07'
+p611
+atRp612
+sS'Auctioneer_OurFutureFaces'
+p613
+g3
+((lp614
+S'male singer'
+p615
+aS'electric bass'
+p616
+aS'vocalists'
+p617
+aS'drum set'
+p618
+aS'banjo'
+p619
+aS'vibraphone'
+p620
+aS'auxiliary percussion'
+p621
+aS'clean electric guitar'
+p622
+aS'piano'
+p623
+aS'horn section'
+p624
+atRp625
+sS'MusicDelta_Zeppelin'
+p626
+g3
+((lp627
+S'drum set'
+p628
+aS'electric bass'
+p629
+aS'distorted electric guitar'
+p630
+atRp631
+sS'MichaelKropf_AllGoodThings'
+p632
+g3
+((lp633
+S'violin'
+p634
+aS'piano'
+p635
+atRp636
+sS'LizNelson_Rainfall'
+p637
+g3
+((lp638
+S'female singer'
+p639
+aS'clean electric guitar'
+p640
+aS'acoustic guitar'
+p641
+atRp642
+sS'TheDistricts_Vermont'
+p643
+g3
+((lp644
+S'male singer'
+p645
+aS'electric bass'
+p646
+aS'vocalists'
+p647
+aS'drum set'
+p648
+aS'synthesizer'
+p649
+aS'clean electric guitar'
+p650
+atRp651
+sS'MusicDelta_ChineseHenan'
+p652
+g3
+((lp653
+S'guzheng'
+p654
+aS'dizi'
+p655
+aS'erhu'
+p656
+aS'yangqin'
+p657
+aS'liuqin'
+p658
+atRp659
+sS'MusicDelta_BebopJazz'
+p660
+g3
+((lp661
+S'drum set'
+p662
+aS'tenor saxophone'
+p663
+aS'piano'
+p664
+aS'double bass'
+p665
+aS'trumpet'
+p666
+atRp667
+sS'MatthewEntwistle_Lontano'
+p668
+g3
+((lp669
+S'female singer'
+p670
+aS'piano'
+p671
+atRp672
+sS'CelestialShore_DieForUs'
+p673
+g3
+((lp674
+S'male singer'
+p675
+aS'electric bass'
+p676
+aS'drum set'
+p677
+aS'tack piano'
+p678
+aS'synthesizer'
+p679
+aS'female singer'
+p680
+aS'clean electric guitar'
+p681
+atRp682
+sS'AlexanderRoss_GoodbyeBolero'
+p683
+g3
+((lp684
+S'male singer'
+p685
+aS'electric bass'
+p686
+aS'acoustic guitar'
+p687
+aS'viola section'
+p688
+aS'drum set'
+p689
+aS'harmonica'
+p690
+aS'brass section'
+p691
+aS'clean electric guitar'
+p692
+atRp693
+sS'ClaraBerryAndWooldog_Stella'
+p694
+g3
+((lp695
+S'electric bass'
+p696
+aS'vocalists'
+p697
+aS'drum set'
+p698
+aS'vibraphone'
+p699
+aS'synthesizer'
+p700
+aS'female singer'
+p701
+aS'piano'
+p702
+aS'auxiliary percussion'
+p703
+atRp704
+sS'DreamersOfTheGhetto_HeavyLove'
+p705
+g3
+((lp706
+S'male singer'
+p707
+aS'electric bass'
+p708
+aS'vocalists'
+p709
+aS'drum set'
+p710
+aS'fx/processed sound'
+p711
+aS'synthesizer'
+p712
+aS'female singer'
+p713
+aS'auxiliary percussion'
+p714
+atRp715
+sS'MusicDelta_Country1'
+p716
+g3
+((lp717
+S'drum set'
+p718
+aS'male singer'
+p719
+aS'electric bass'
+p720
+aS'acoustic guitar'
+p721
+atRp722
+sS'MusicDelta_Country2'
+p723
+g3
+((lp724
+S'drum set'
+p725
+aS'clean electric guitar'
+p726
+aS'electric bass'
+p727
+aS'female singer'
+p728
+atRp729
+sS'SweetLights_YouLetMeDown'
+p730
+g3
+((lp731
+S'male singer'
+p732
+aS'electric bass'
+p733
+aS'vocalists'
+p734
+aS'acoustic guitar'
+p735
+aS'drum set'
+p736
+aS'timpani'
+p737
+aS'tack piano'
+p738
+aS'synthesizer'
+p739
+aS'claps'
+p740
+aS'piano'
+p741
+aS'auxiliary percussion'
+p742
+atRp743
+sS'EthanHein_1930sSynthAndUprightBass'
+p744
+g3
+((lp745
+S'drum machine'
+p746
+aS'fx/processed sound'
+p747
+aS'double bass'
+p748
+atRp749
+sS'StevenClark_Bounty'
+p750
+g3
+((lp751
+S'male singer'
+p752
+aS'electric bass'
+p753
+aS'vocalists'
+p754
+aS'drum set'
+p755
+aS'synthesizer'
+p756
+aS'piano'
+p757
+aS'clean electric guitar'
+p758
+atRp759
+sS'MusicDelta_ChineseXinJing'
+p760
+g3
+((lp761
+S'liuqin'
+p762
+aS'gu'
+p763
+aS'zhongruan'
+p764
+aS'erhu'
+p765
+aS'yangqin'
+p766
+atRp767
+sS'LizNelson_Coldwar'
+p768
+g3
+((lp769
+S'female singer'
+p770
+aS'acoustic guitar'
+p771
+atRp772
+sS'MusicDelta_Grunge'
+p773
+g3
+((lp774
+S'drum set'
+p775
+aS'male singer'
+p776
+aS'electric bass'
+p777
+aS'distorted electric guitar'
+p778
+atRp779
+sS'AClassicEducation_NightOwl'
+p780
+g3
+((lp781
+S'male singer'
+p782
+aS'electric bass'
+p783
+aS'vocalists'
+p784
+aS'drum set'
+p785
+aS'fx/processed sound'
+p786
+aS'synthesizer'
+p787
+aS'distorted electric guitar'
+p788
+aS'tambourine'
+p789
+aS'clean electric guitar'
+p790
+atRp791
+sS'JoelHelander_IntheAtticBedroom'
+p792
+g3
+((lp793
+S'violin'
+p794
+aS'cello'
+p795
+aS'viola'
+p796
+aS'Main System'
+p797
+atRp798
+sS'MusicDelta_Hendrix'
+p799
+g3
+((lp800
+S'drum set'
+p801
+aS'male singer'
+p802
+aS'electric bass'
+p803
+aS'distorted electric guitar'
+p804
+atRp805
+sS'LizNelson_ImComingHome'
+p806
+g3
+((lp807
+S'female singer'
+p808
+atRp809
+sS'Phoenix_LarkOnTheStrandDrummondCastle'
+p810
+g3
+((lp811
+S'violin'
+p812
+aS'flute'
+p813
+aS'acoustic guitar'
+p814
+atRp815
+sS'ChrisJacoby_PigsFoot'
+p816
+g3
+((lp817
+S'mandolin'
+p818
+aS'electric bass'
+p819
+aS'kick drum'
+p820
+aS'tabla'
+p821
+atRp822
+sS'Mozart_DiesBildnis'
+p823
+g3
+((lp824
+S'male singer'
+p825
+aS'piano'
+p826
+atRp827
+sS'JoelHelander_ExcessiveResistancetoChange'
+p828
+g3
+((lp829
+S'acoustic guitar'
+p830
+aS'drum set'
+p831
+aS'tack piano'
+p832
+aS'violin section'
+p833
+aS'bassoon'
+p834
+aS'double bass'
+p835
+aS'french horn'
+p836
+aS'violin'
+p837
+aS'piano'
+p838
+aS'auxiliary percussion'
+p839
+aS'clarinet'
+p840
+aS'horn section'
+p841
+atRp842
+sS'PortStWillow_StayEven'
+p843
+g3
+((lp844
+S'male singer'
+p845
+aS'electric bass'
+p846
+aS'vocalists'
+p847
+aS'drum set'
+p848
+aS'fx/processed sound'
+p849
+aS'cymbal'
+p850
+aS'piano'
+p851
+aS'clean electric guitar'
+p852
+atRp853
+sS'ClaraBerryAndWooldog_WaltzForMyVictims'
+p854
+g3
+((lp855
+S'drum set'
+p856
+aS'female singer'
+p857
+aS'piano'
+p858
+aS'electric bass'
+p859
+aS'glockenspiel'
+p860
+atRp861
+sS'TheSoSoGlos_Emergency'
+p862
+g3
+((lp863
+S'male singer'
+p864
+aS'electric bass'
+p865
+aS'vocalists'
+p866
+aS'acoustic guitar'
+p867
+aS'drum set'
+p868
+aS'fx/processed sound'
+p869
+aS'vibraphone'
+p870
+aS'synthesizer'
+p871
+aS'distorted electric guitar'
+p872
+aS'auxiliary percussion'
+p873
+atRp874
+sS'Phoenix_BrokenPledgeChicagoReel'
+p875
+g3
+((lp876
+S'violin'
+p877
+aS'flute'
+p878
+aS'acoustic guitar'
+p879
+atRp880
+sS'BrandonWebster_YesSirICanFly'
+p881
+g3
+((lp882
+S'piano'
+p883
+aS'male singer'
+p884
+atRp885
+sS'ClaraBerryAndWooldog_AirTraffic'
+p886
+g3
+((lp887
+S'electric bass'
+p888
+aS'drum set'
+p889
+aS'timpani'
+p890
+aS'female singer'
+p891
+aS'piano'
+p892
+aS'clean electric guitar'
+p893
+aS'lap steel guitar'
+p894
+atRp895
+sS'MatthewEntwistle_TheFlaxenField'
+p896
+g3
+((lp897
+S'violin'
+p898
+aS'clarinet'
+p899
+aS'piano'
+p900
+aS'cello'
+p901
+atRp902
+sS'KarimDouaidy_Hopscotch'
+p903
+g3
+((lp904
+S'darbuka'
+p905
+aS'electric bass'
+p906
+aS'acoustic guitar'
+p907
+aS'oud'
+p908
+aS'doumbek'
+p909
+aS'claps'
+p910
+aS'piano'
+p911
+aS'auxiliary percussion'
+p912
+atRp913
+sS'Debussy_LenfantProdigue'
+p914
+g3
+((lp915
+S'male singer'
+p916
+aS'piano'
+p917
+atRp918
+sS'MusicDelta_80sRock'
+p919
+g3
+((lp920
+S'drum set'
+p921
+aS'male singer'
+p922
+aS'electric bass'
+p923
+aS'distorted electric guitar'
+p924
+atRp925
+sS'CroqueMadame_Pilot'
+p926
+g3
+((lp927
+S'drum set'
+p928
+aS'piano'
+p929
+aS'clean electric guitar'
+p930
+aS'double bass'
+p931
+atRp932
+sS'MusicDelta_InTheHalloftheMountainKing'
+p933
+g3
+((lp934
+S'toms'
+p935
+aS'viola'
+p936
+aS'oboe'
+p937
+aS'violin section'
+p938
+aS'piccolo'
+p939
+aS'flute'
+p940
+aS'trumpet section'
+p941
+aS'tuba'
+p942
+aS'cymbal'
+p943
+aS'bassoon'
+p944
+aS'double bass'
+p945
+aS'cello'
+p946
+aS'trombone'
+p947
+aS'french horn section'
+p948
+aS'clarinet'
+p949
+aS'timpani'
+p950
+atRp951
+sS'TablaBreakbeatScience_Scorpio'
+p952
+g3
+((lp953
+S'synthesizer'
+p954
+aS'drum machine'
+p955
+aS'fx/processed sound'
+p956
+aS'tabla'
+p957
+aS'accordion'
+p958
+atRp959
+sS'Creepoid_OldTree'
+p960
+g3
+((lp961
+S'male singer'
+p962
+aS'electric bass'
+p963
+aS'vocalists'
+p964
+aS'drum set'
+p965
+aS'fx/processed sound'
+p966
+aS'distorted electric guitar'
+p967
+aS'auxiliary percussion'
+p968
+atRp969
+sS'MusicDelta_FunkJazz'
+p970
+g3
+((lp971
+S'drum set'
+p972
+aS'electric bass'
+p973
+aS'electric piano'
+p974
+aS'alto saxophone'
+p975
+atRp976
+sS'MusicDelta_SpeedMetal'
+p977
+g3
+((lp978
+S'drum set'
+p979
+aS'electric bass'
+p980
+aS'distorted electric guitar'
+p981
+atRp982
+sS'EthanHein_HarmonicaFigure'
+p983
+g3
+((lp984
+S'synthesizer'
+p985
+aS'drum machine'
+p986
+aS'harmonica'
+p987
+atRp988
+sS'MusicDelta_CoolJazz'
+p989
+g3
+((lp990
+S'drum set'
+p991
+aS'trumpet'
+p992
+aS'piano'
+p993
+aS'double bass'
+p994
+aS'baritone saxophone'
+p995
+atRp996
+sS'Phoenix_ElzicsFarewell'
+p997
+g3
+((lp998
+S'mandolin'
+p999
+aS'violin'
+p1000
+aS'acoustic guitar'
+p1001
+atRp1002
+sS'InvisibleFamiliars_DisturbingWildlife'
+p1003
+g3
+((lp1004
+S'shaker'
+p1005
+aS'electric bass'
+p1006
+aS'vocalists'
+p1007
+aS'drum set'
+p1008
+aS'trumpet section'
+p1009
+aS'tack piano'
+p1010
+aS'claps'
+p1011
+aS'clean electric guitar'
+p1012
+aS'male singer'
+p1013
+atRp1014
+sS'AmarLal_SpringDay1'
+p1015
+g3
+((lp1016
+S'acoustic guitar'
+p1017
+atRp1018
+sS'AimeeNorwich_Flying'
+p1019
+g3
+((lp1020
+S'electric bass'
+p1021
+aS'drum set'
+p1022
+aS'fx/processed sound'
+p1023
+aS'cello'
+p1024
+aS'trombone'
+p1025
+aS'piano'
+p1026
+aS'clean electric guitar'
+p1027
+aS'clarinet'
+p1028
+atRp1029
+sS'MusicDelta_ModalJazz'
+p1030
+g3
+((lp1031
+S'drum set'
+p1032
+aS'tenor saxophone'
+p1033
+aS'piano'
+p1034
+aS'double bass'
+p1035
+aS'trumpet'
+p1036
+atRp1037
+sS'TablaBreakbeatScience_MiloVsMongo'
+p1038
+g3
+((lp1039
+S'drum set'
+p1040
+aS'synthesizer'
+p1041
+aS'fx/processed sound'
+p1042
+aS'tabla'
+p1043
+aS'mandolin'
+p1044
+atRp1045
+sS'EthanHein_BluesForNofi'
+p1046
+g3
+((lp1047
+S'drum set'
+p1048
+aS'electric bass'
+p1049
+atRp1050
+sS'TablaBreakbeatScience_WhoIsIt'
+p1051
+g3
+((lp1052
+S'electric bass'
+p1053
+aS'accordion'
+p1054
+aS'mandolin'
+p1055
+aS'synthesizer'
+p1056
+aS'drum machine'
+p1057
+aS'tabla'
+p1058
+atRp1059
+sS'MusicDelta_Rockabilly'
+p1060
+g3
+((lp1061
+S'drum set'
+p1062
+aS'clean electric guitar'
+p1063
+aS'electric bass'
+p1064
+aS'distorted electric guitar'
+p1065
+aS'female singer'
+p1066
+atRp1067
+s.

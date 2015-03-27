@@ -1,0 +1,22 @@
+{% from "_formhelpers.html" import render_field %}
+<!doctype html>
+<title>Online Form</title>
+<link rel="stylesheet" type="text/cs" href="{{ url_for('static', filename='style.css') }}">
+<body>
+<form method=post action="/">
+<dl>
+    {{ render_field(form.group) }}
+    {{ render_field(form.songs, size=122) }}
+  </dl>
+  <p class=submitbuttom><input type=submit value=Check></p>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+  {% endwith %}
+</form>
+</body>
