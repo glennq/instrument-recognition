@@ -23,9 +23,9 @@ def inputData():
                     instr = grouping[group][j] if j in grouping[group] else j
                 except Exception, e:
                     print 'exception: {}'.format(e)
-                counted.add(instr)
                 if instr not in counted:
                     instr_cnt[instr] = instr_cnt.get(instr, 0) + 1
+                counted.add(instr)
         flash('Intrument counts:')
         for k, v in sorted(instr_cnt.items(), key=lambda x: x[1]):
             flash('{}:\t{}'.format(k, v))
