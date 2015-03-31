@@ -29,6 +29,19 @@ def read_groupings(fpath, num):
     return grouping
 
 
+def num_nonrare_inst(rannotation, thres):
+    all_songs = set()
+    songs = set()
+    cnt = 0
+    for k, v in rannotation.items():
+        all_songs.update(v)
+        if len(v) < thres:
+            songs.update(v)
+        else:
+            cnt += 1
+    return cnt, len(all_songs.difference(songs))
+
+
 if __name__ == '__main__':
     """Assumes that anno_label.pkl is already produced by data_prep.py
     """
@@ -41,3 +54,9 @@ if __name__ == '__main__':
         print '{}:'.format(k)
         for i in rannotation[k]:
             print '    {}'.format(i)
+    n_nonrare_inst, n_songs_nonrare_inst = num_nonrare_inst(rannotation,
+                                                            int(sys.argv[2]))
+    print 'Number of songs with no instruments appearing in less than {} songs = {}'. \
+        format(sys.argv[2], n_songs_nonrare_inst)
+    print 'Number of instrument appearing in at least {} songs = {}'. \
+        format(sys.argv[2], n_nonrare_inst)
