@@ -1,4 +1,5 @@
 import numpy as np
+import cPickle
 
 
 """
@@ -14,7 +15,7 @@ WARNING: Code not tested
 """
 
 
-def multi_label_stratif(self, labels, num_split=2, p_split=[0.8, 0.2],
+def multi_label_stratif(labels, num_split=2, p_split=[0.8, 0.2],
                         rand_state=None):
     """Split the data according to labels
     Args:
@@ -41,10 +42,10 @@ def multi_label_stratif(self, labels, num_split=2, p_split=[0.8, 0.2],
     L = set()  # set of all possible labels
     n_label = {}  # examples containing each label
     for i, e in enumerate(labels):
-        L.update(i)
+        L.update(e)
         for j in e:
             if j not in n_label:
-                n_label[j] = set()
+                n_label[j] = set([i])
             else:
                 n_label[j].add(i)
     index = set(range(N))
@@ -66,7 +67,7 @@ def multi_label_stratif(self, labels, num_split=2, p_split=[0.8, 0.2],
 
     while (len(index) > 0):
         # Find the label with the fewest (but at least one) remaining examples
-        min_l = [labels[0][0]]
+        min_l = [next(iter(L))]
         for e in L:
             if len(n_label[e]) == 0:
                 continue
@@ -77,9 +78,11 @@ def multi_label_stratif(self, labels, num_split=2, p_split=[0.8, 0.2],
                 elif len(n_label[e]) == len(n_label[min_l[0]]) and e not in min_l:
                     min_l.append(e)
         # randomly break tie
+        if len(min_l) == 1 and len(n_label[min_l[0]]) == 0:
+            break
         l = min_l[rng.randint(len(min_l))]
 
-        for i in n_label[l]:
+        for i in n_label[l].copy():
             # Find the subset(s) with the largest number of desired examples
             # for this label
             M = [0]
@@ -107,11 +110,32 @@ def multi_label_stratif(self, labels, num_split=2, p_split=[0.8, 0.2],
 
             # assign and update
             splits[m].append(i)
+            print 'assigned {} to subset {}'.format(i, m)
             assert(i in index)
             index.discard(i)
             for e in labels[i]:
                 n_label[e].discard(i)
                 c_label_subset[e][m] -= 1
             c_subset[m] -= 1
-
+        print 'end of loop for {}'.format(l)
+        print 'Number of unassigned samples = {}'.format(len(index))
     return splits
+
+
+def main():
+    with open('annotation_investigator/song_instr.pkl', 'rb') as f:
+        label_mapping = cPickle.load(f)
+    X, y = zip(*label_mapping.items())
+    y = [list(e) for e in y]
+    train_i, test_i = multi_label_stratif(y, rand_state=2345)
+    X = np.array(X, dtype=object)
+    train = X[train_i]
+    test = X[test_i]
+    with open('train_songs.txt', 'wb') as f:
+        f.write('\n'.join(train))
+    with open('test_songs.txt', 'wb') as f:
+        f.write('\n'.join(test))
+
+
+if __name__ == '__main__':
+    main()
