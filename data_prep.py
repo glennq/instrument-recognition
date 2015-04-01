@@ -284,7 +284,7 @@ def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
     dpath = os.path.join(in_path, "Audio")
     dlist = sorted(os.listdir(dpath))  # get list of tracks in sorted order
     # write the list to file as reference for song_names in data
-    with open(os.path.join(out_path, 'song_name_list.txt')) as f:
+    with open(os.path.join(out_path, 'song_name_list.txt'), 'wb') as f:
         f.write('\n'.join(dlist))
 
     # get a mapping of song names to their sorted order
