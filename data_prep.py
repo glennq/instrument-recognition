@@ -243,6 +243,22 @@ def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
     Returns:
         N/A
     """
+    # define parameters
+    length = 1
+    time_window = 100.0
+
+    # save parameters for this run
+    to_write = []
+    to_write.append('save_size = {}\n'.format(save_size))
+    to_write.append('norm_channel = {}\n'.format(norm_channel))
+    to_write.append('label_aggr = {}\n'.format(label_aggr))
+    to_write.append('start_from = {}\n'.format(start_from))
+    to_write.append('groupID = {}\n'.format(groupID))
+    to_write.append('patch_length = {}\n'.format(length))
+    to_write.append('time_window = {}\n'.format(time_window))
+
+    with open(os.path.join(out_path, 'config.txt'), 'wb') as f:
+        f.write('\n'.join(to_write))
 
     # read annotations and match with metadata
     anno_pkl = os.path.join(out_path, 'anno_label.pkl')
@@ -276,7 +292,8 @@ def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
             print 'finished normalizing data'
         # split to x second patches
         patched_data = split_music_to_patches(data, annotation,
-                                              all_instruments_map, label_aggr)
+                                              all_instruments_map, label_aggr,
+                                              length, time_window)
         print 'finished taking patchs of data'
         del data
         # save patches to file
