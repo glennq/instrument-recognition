@@ -2,13 +2,13 @@ import pandas as pd
 import librosa
 
 
-def patch_label(start, end, time_windows, annotation, songname, binary=False, threshold=None):
+def patch_label(start, end, time_windows, annotation, binary=False, threshold=None):
     """Labeling a patch given annotation
     Args:
         start(float): start time of a patch (in second)
         end(float): end time of a patch (in second)
         time_windows(float): time windows for average (in milliseconds)
-        annotation(dictionary): {song_name(string): annotation(pandas df)}
+        annotation(DataFrame): annotation dataframe for a specific song
         songname(string): song_name(string)
     Returns:
         label(pd.DataFrame):
@@ -23,7 +23,7 @@ def patch_label(start, end, time_windows, annotation, songname, binary=False, th
     end_frame = librosa.time_to_frames(end, sr=1/0.0464, hop_length=1)-1
     moving_frame = librosa.time_to_frames(time_windows/1000, sr=1/0.0464, hop_length=1)-librosa.time_to_frames(0, sr=1/0.0464, hop_length=1)
     #Pick annotation
-    time_annot = annotation[songname].loc[start_frame:end_frame].drop('time', 1)
+    time_annot = annotation.loc[start_frame:end_frame].drop('time', 1)
     label = {}
     #Using maximum value of average in moving windows as label
     for music_ins in time_annot.columns:
