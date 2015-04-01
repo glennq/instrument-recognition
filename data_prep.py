@@ -213,9 +213,10 @@ def split_music_to_patches(data, annotation, inst_map, label_aggr, length=1):
                     temp = temp.max()
                 label[inst_map[j]] = temp
                 is_present[inst_map[j]] = 1.0
-            res.append((patch, label, is_present))
-    X, y, present = zip(*res)
-    return {'X': np.array(X), 'y': np.array(y), 'present': np.array(present)}
+            res.append((patch, label, is_present, k, (i*length, (i+1)*length)))
+    X, y, present, song_name, time = zip(*res)
+    return {'X': np.array(X), 'y': np.array(y), 'present': np.array(present),
+            'song_name': song_name, 'time': time}
 
 
 def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
