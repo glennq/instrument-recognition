@@ -177,7 +177,7 @@ def match_meta_annotation(meta, annotation):
 
 
 def split_music_to_patches(data, annotation, inst_map, label_aggr, length=1,
-                           time_window=100.0):
+                           time_window=100.0, binary=False, threshold=None):
     """Split each music file into (length) second patches and label each patch
 
     Note: for each music file, the last patch that is not long enough is
@@ -209,8 +209,8 @@ def split_music_to_patches(data, annotation, inst_map, label_aggr, length=1,
             if label_aggr is not None:
                 inst_conf = sub_df.apply(label_aggr, 0).drop('time')
             else:
-                inst_conf = patch_label.patch_label(i*length, (i+1)*length,
-                                                    time_window, sub_df)
+                inst_conf = patch_label.patch_label(0, 1, time_window, sub_df,
+                                                    binary, threshold)
             label = np.zeros(len(inst_map), dtype='float32')
             is_present = np.zeros(len(inst_map), dtype='float32')
             for j in inst_conf.index:
@@ -246,6 +246,8 @@ def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
     # define parameters
     length = 1
     time_window = 100.0
+    binary = False
+    threshold = None
 
     # save parameters for this run
     to_write = []
@@ -256,6 +258,8 @@ def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
     to_write.append('groupID = {}'.format(groupID))
     to_write.append('patch_length = {}'.format(length))
     to_write.append('time_window = {}'.format(time_window))
+    to_write.append('binary = {}'.format(binary))
+    to_write.append('threshold = {}'.format(threshold))
 
     with open(os.path.join(out_path, 'config.txt'), 'wb') as f:
         f.write('\n'.join(to_write))
@@ -300,7 +304,8 @@ def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
         # split to x second patches
         patched_data = split_music_to_patches(data, annotation,
                                               all_instruments_map, label_aggr,
-                                              length, time_window)
+                                              length, time_window, binary,
+                                              threshold)
         patched_data['song_name'] = np.array([song_name_map[i] for i in
                                               patched_data['song_name']])
         print 'finished taking patchs of data'
