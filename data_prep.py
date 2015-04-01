@@ -9,6 +9,7 @@ import gc
 from scipy.io import wavfile
 from scipy.io import savemat
 import copy
+import patch_label
 
 
 """
@@ -175,7 +176,8 @@ def match_meta_annotation(meta, annotation):
     return sorted(list(all_instruments))
 
 
-def split_music_to_patches(data, annotation, inst_map, label_aggr, length=1):
+def split_music_to_patches(data, annotation, inst_map, label_aggr, length=1,
+                           time_window=100.0):
     """Split each music file into (length) second patches and label each patch
 
     Note: for each music file, the last patch that is not long enough is
@@ -191,6 +193,7 @@ def split_music_to_patches(data, annotation, inst_map, label_aggr, length=1):
         label_aggr(function): a function that defines the way labels for each
                               sample chunk is generated, default is np.mean
         length(int): length of each patch, in seconds
+        time_window(float): time windows for average (in milliseconds)
     Returns:
         dict: {'X': np array for X, 'y': np array for y, 'present': np array
                 of indicators for whether the instrument is present in the
@@ -203,7 +206,11 @@ def split_music_to_patches(data, annotation, inst_map, label_aggr, length=1):
             patch = v[:, e:patch_size+e].ravel()
             sub_df = annotation[k][(i * length <= annotation[k].time) &
                                    (annotation[k].time < (i + 1) * length)]
-            inst_conf = sub_df.apply(label_aggr, 0).drop('time')
+            if label_aggr is not None:
+                inst_conf = sub_df.apply(label_aggr, 0).drop('time')
+            else:
+                inst_conf = patch_label.patch_label(i*length, (i+1)*length,
+                                                    time_window, sub_df)
             label = np.zeros(len(inst_map), dtype='float32')
             is_present = np.zeros(len(inst_map), dtype='float32')
             for j in inst_conf.index:
@@ -220,7 +227,7 @@ def split_music_to_patches(data, annotation, inst_map, label_aggr, length=1):
 
 
 def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
-              label_aggr=np.mean, start_from=0, groupID='Group 4'):
+              label_aggr=None, start_from=0, groupID='Group 4'):
     """Prepare data for preprocessing
     Args:
         in_path(str): the path for "MedleyDB"
