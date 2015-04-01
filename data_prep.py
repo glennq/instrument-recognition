@@ -209,8 +209,8 @@ def split_music_to_patches(data, annotation, inst_map, label_aggr, length=1,
             if label_aggr is not None:
                 inst_conf = sub_df.apply(label_aggr, 0).drop('time')
             else:
-                inst_conf = patch_label.patch_label(0, 1, time_window, sub_df,
-                                                    binary, threshold)
+                inst_conf = patch_label.patch_label(0, length, time_window,
+                                                    sub_df, binary, threshold)
             label = np.zeros(len(inst_map), dtype='float32')
             is_present = np.zeros(len(inst_map), dtype='float32')
             for j in inst_conf.index:
