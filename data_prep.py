@@ -223,7 +223,7 @@ def split_music_to_patches(data, annotation, inst_map, label_aggr, length=1,
             res.append((patch, label, is_present, k, (i*length, (i+1)*length)))
     X, y, present, song_name, time = zip(*res)
     return {'X': np.array(X), 'y': np.array(y), 'present': np.array(present),
-            'song_name': song_name, 'time': time}
+            'song_name': song_name, 'time': np.array(time)}
 
 
 def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
@@ -283,6 +283,13 @@ def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
     # read mixed tracks
     dpath = os.path.join(in_path, "Audio")
     dlist = sorted(os.listdir(dpath))  # get list of tracks in sorted order
+    # write the list to file as reference for song_names in data
+    with open(os.path.join(out_path, 'song_name_list.txt')) as f:
+        f.write('\n'.join(dlist))
+
+    # get a mapping of song names to their sorted order
+    song_name_map = {e: i for i, e in enumerate(dlist)}
+
     for i in range(max(start_from, 0), len(dlist), save_size):
         tdlist = dlist[i:i+save_size]
         data = read_mixed_from_files(dpath, tdlist)
@@ -294,6 +301,8 @@ def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
         patched_data = split_music_to_patches(data, annotation,
                                               all_instruments_map, label_aggr,
                                               length, time_window)
+        patched_data['song_name'] = np.array([song_name_map[i] for i in
+                                              patched_data['song_name']])
         print 'finished taking patchs of data'
         del data
         # save patches to file
