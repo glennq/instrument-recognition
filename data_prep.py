@@ -307,7 +307,8 @@ def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
             savemat(patches_save_path, patched_data)
         del patched_data
         gc.collect()
-        print 'finished {} of {}'.format(i+save_size, len(dlist))
+        print 'finished {} of {}'.format(max(i+save_size, len(dlist)),
+                                         len(dlist))
 
 
 def main():
