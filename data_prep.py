@@ -296,7 +296,7 @@ def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
                                               all_instruments_map, label_aggr,
                                               length, time_window, binary,
                                               threshold)
-        patched_data['song_name'] = np.array([song_name_map[i] for i in
+        patched_data['song_name'] = np.array([song_name_map[e] for e in
                                               patched_data['song_name']])
         print 'finished taking patchs of data'
         del data
