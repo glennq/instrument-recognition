@@ -293,23 +293,25 @@ def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
             normalize_data(data)
             print 'finished normalizing data'
         # split to x second patches
-        patched_data = split_music_to_patches(data, annotation,
-                                              all_instruments_map, label_aggr,
-                                              length, time_window, binary,
-                                              threshold)
-        temp_l = len(patched_data['song_name'])
-        patched_data['song_name'] = np.array([song_name_map[e] for e in
-                                              patched_data['song_name']],
-                                             dtype='float32').reshape(temp_l,
-                                                                      1)
-        print 'finished taking patchs of data'
+        for k, v in data.items():
+            patched_data = split_music_to_patches({k: v}, annotation,
+                                                  all_instruments_map,
+                                                  label_aggr, length,
+                                                  time_window, binary,
+                                                  threshold)
+            temp_l = len(patched_data['song_name'])
+            patched_data['song_name'] = np.array([song_name_map[e] for e in
+                                                  patched_data['song_name']],
+                                                 dtype='float32'). \
+                reshape(temp_l, 1)
+            # save patches to file
+            patches_save_path = os.path.join(out_path, '{}_patched.mat'.
+                                             format(k))
+            if not os.path.exists(patches_save_path):
+                savemat(patches_save_path, patched_data)
+            del patched_data
+            print 'finished taking patches of {}'.format(k)
         del data
-        # save patches to file
-        patches_save_path = os.path.join(out_path, 'patch_data_{}_{}.mat'.
-                                         format(i, i+save_size))
-        if not os.path.exists(patches_save_path):
-            savemat(patches_save_path, patched_data)
-        del patched_data
         gc.collect()
         print 'finished {} of {}'.format(max(i+save_size, len(dlist)),
                                          len(dlist))
