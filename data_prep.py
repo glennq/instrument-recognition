@@ -172,7 +172,7 @@ def match_meta_annotation(meta, annotation):
     all_instruments = set()
     for k, v in annotation.items():
         v.rename(columns=meta[k], inplace=True)
-        all_instruments.update(meta[k].values())
+        all_instruments.update(v.columns[1:])
     return sorted(list(all_instruments))
 
 
