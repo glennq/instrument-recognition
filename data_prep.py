@@ -223,7 +223,7 @@ def split_music_to_patches(data, annotation, inst_map, label_aggr, length=1,
             res.append((patch, label, is_present, k, (i*length, (i+1)*length)))
     X, y, present, song_name, time = zip(*res)
     return {'X': np.array(X), 'y': np.array(y), 'present': np.array(present),
-            'song_name': song_name, 'time': np.array(time)}
+            'song_name': song_name, 'time': np.array(time, dtype='float32')}
 
 
 def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
@@ -296,8 +296,11 @@ def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
                                               all_instruments_map, label_aggr,
                                               length, time_window, binary,
                                               threshold)
+        temp_l = len(patched_data['song_name'])
         patched_data['song_name'] = np.array([song_name_map[e] for e in
-                                              patched_data['song_name']])
+                                              patched_data['song_name']],
+                                             dtype='float32').reshape(temp_l,
+                                                                      1)
         print 'finished taking patchs of data'
         del data
         # save patches to file
