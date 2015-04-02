@@ -250,17 +250,7 @@ def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
     threshold = None
 
     # save parameters for this run
-    to_write = []
-    to_write.append('save_size = {}'.format(save_size))
-    to_write.append('norm_channel = {}'.format(norm_channel))
-    to_write.append('label_aggr = {}'.format(label_aggr))
-    to_write.append('start_from = {}'.format(start_from))
-    to_write.append('groupID = {}'.format(groupID))
-    to_write.append('patch_length = {}'.format(length))
-    to_write.append('time_window = {}'.format(time_window))
-    to_write.append('binary = {}'.format(binary))
-    to_write.append('threshold = {}'.format(threshold))
-
+    to_write = ['{} = {}'.format(k, v) for k, v in locals().items()]
     with open(os.path.join(out_path, 'config.txt'), 'wb') as f:
         f.write('\n'.join(to_write))
 
