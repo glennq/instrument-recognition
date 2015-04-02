@@ -313,7 +313,7 @@ def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
             print 'finished taking patches of {}'.format(k)
         del data
         gc.collect()
-        print 'finished {} of {}'.format(max(i+save_size, len(dlist)),
+        print 'finished {} of {}'.format(min(i+save_size, len(dlist)),
                                          len(dlist))
 
 
