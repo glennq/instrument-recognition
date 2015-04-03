@@ -271,6 +271,10 @@ def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
         with open(anno_pkl, 'w') as f:
             cPickle.dump(annotation, f)
 
+    # save all instrument list to file
+    with open('all_instruments.txt', 'wb') as f:
+        f.write('\n'.join(all_instruments))
+
     # get a dictionary mapping all instrument to sorted order
     all_instruments_map = {e: i for i, e in enumerate(all_instruments)}
     print 'Total number of labels = {}'.format(len(all_instruments))

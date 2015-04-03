@@ -10,8 +10,6 @@ Based on the paper titled "On the Stratification of Multi-Label Data"
 (Sechidis et al., 2011)
 which is accessible from the following URL:
 http://lpis.csd.auth.gr/publications/sechidis-ecmlpkdd-2011.pdf
-
-WARNING: Code not tested
 """
 
 
