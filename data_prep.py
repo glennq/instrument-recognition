@@ -228,7 +228,7 @@ def split_music_to_patches(data, annotation, inst_map, label_aggr, length=1,
 
 
 def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
-              label_aggr=None, start_from=0, groupID='Group 4'):
+              label_aggr=None, start_from=0, groupID='Group 4', **kwargs):
     """Prepare data for preprocessing
     Args:
         in_path(str): the path for "MedleyDB"
@@ -241,15 +241,10 @@ def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
         start_from(int): the order of file in alphebic order to start reading
                          from. All files before that are ignored. Used to
                          continue from the file last read.
+        kwargs (dict): additional arguments to pass to split_music_to_patches
     Returns:
         N/A
     """
-    # define parameters
-    length = 1
-    time_window = 100.0
-    binary = False
-    threshold = None
-
     # save parameters for this run
     to_write = ['{} = {}'.format(k, v) for k, v in locals().items()]
     with open(os.path.join(out_path, 'config.txt'), 'wb') as f:
@@ -300,9 +295,7 @@ def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
         for k, v in data.items():
             patched_data = split_music_to_patches({k: v}, annotation,
                                                   all_instruments_map,
-                                                  label_aggr, length,
-                                                  time_window, binary,
-                                                  threshold)
+                                                  label_aggr, **kwargs)
             temp_l = len(patched_data['song_name'])
             patched_data['song_name'] = np.array([song_name_map[e] for e in
                                                   patched_data['song_name']],
@@ -324,4 +317,5 @@ def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
 def main():
     root = os.path.abspath(os.sep)
     in_path = os.path.join(root, 'Volumes', 'VOL2', 'MedleyDB')
-    prep_data(in_path)
+    prep_data(in_path, length=1, time_window=100.0, binary=False,
+              threshold=None)
