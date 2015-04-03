@@ -75,7 +75,7 @@ def replace_rare(label_mapping, rare_instr):
     """
     for k, v in label_mapping.items():
         label_mapping[k] = v - rare_instr
-        if label_mapping[k] < len(v):
+        if len(label_mapping[k]) < len(v):
             print '{} has rare item'.format(k)
             label_mapping[k] = label_mapping[k].add('OTHER')
 
@@ -95,11 +95,15 @@ def do_split(X, label_mapping, kwargs):
     X = np.array(X, dtype=object)
     train = X[train_i]
     test = X[test_i]
-    with open('train_songs.txt', 'wb') as f:
-        f.write('\n'.join(train))
-    with open('test_songs.txt', 'wb') as f:
-        f.write('\n'.join(test))
     return train, test
+
+
+def get_instr_count(song_names, label_mapping):
+    cnt = {}
+    for i in song_names:
+        for j in label_mapping[i]:
+            cnt = cnt.get(j, 0) + 1
+    return cnt
 
 
 def build_train_test_set(train, test, all_instruments, rare_instr):
@@ -199,6 +203,12 @@ def generate_split(groupID, rare_thres, songs_to_split=None, start_song=0,
         f.write('\n'.join(train))
     with open('test_songs.txt', 'wb') as f:
         f.write('\n'.join(test))
+    train_cnt = [str(i) for i in get_instr_count(train, label_mapping).items()]
+    with open('train_instr_distr.txt', 'wb') as f:
+        f.write('\n'.join(train_cnt))
+    test_cnt = [str(i) for i in get_instr_count(test, label_mapping).items()]
+    with open('test_instr_distr.txt', 'wb') as f:
+        f.write('\n'.join(test_cnt))
     build_train_test_set(train, test, all_instruments, rare_instr)
 
 
