@@ -46,7 +46,8 @@ def read_instr_list(fpath=os.curdir):
 
 def replace_with_grouping(label_mapping, grouping):
     for k, v in label_mapping.items():
-        label_mapping[k] = set([grouping[i] for i in v])
+        label_mapping[k] = set([grouping[i] if i in grouping else i
+                                for i in v])
     return label_mapping
 
 
@@ -77,7 +78,7 @@ def replace_rare(label_mapping, rare_instr):
         label_mapping[k] = v - rare_instr
         if len(label_mapping[k]) < len(v):
             print '{} has rare item'.format(k)
-            label_mapping[k] = label_mapping[k].add('OTHER')
+            label_mapping[k].add('OTHER')
 
 
 def do_split(X, label_mapping, kwargs):
@@ -102,7 +103,7 @@ def get_instr_count(song_names, label_mapping):
     cnt = {}
     for i in song_names:
         for j in label_mapping[i]:
-            cnt = cnt.get(j, 0) + 1
+            cnt[j] = cnt.get(j, 0) + 1
     return cnt
 
 
@@ -187,7 +188,7 @@ def generate_split(groupID, rare_thres, songs_to_split=None, start_song=0,
     label_mapping = read_song_instr_map(fpath)
     song_name_list = read_song_list(fpath)
     all_instruments = read_instr_list(fpath)
-    if songs_to_split is None:
+    if songs_to_split is not None:
         song_name_list = [song_name_list[i] for i in songs_to_split]
     else:
         song_name_list = song_name_list[start_song:end_song]
