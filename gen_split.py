@@ -127,7 +127,7 @@ def build_train_test_set(train, test, all_instruments, rare_instr):
     for i in test:
         data = loadmat(os.path.join('data', '{}_patched.mat'.format(i)))
         for j, e in enumerate(['X', 'y', 'present', 'song_name', 'time']):
-            test_data[j].append(data[e])
+            test_data[j].append(np.float32(data[e]))
         del data
     test_data = [np.vstack(i) for i in test_data]
     test_data = dict(zip(['test_X', 'test_y', 'test_p', 'test_s', 'test_t'],
@@ -148,7 +148,7 @@ def build_train_test_set(train, test, all_instruments, rare_instr):
     for i in train:
         data = loadmat(os.path.join('data', '{}_patched.mat'.format(i)))
         for j, e in enumerate(['X', 'y', 'present', 'song_name', 'time']):
-            train_data[j].append(data[e])
+            train_data[j].append(np.float32(data[e]))
         del data
     train_data = [np.vstack(i) for i in train_data]
     train_data = dict(zip(['train_X', 'train_y', 'train_p', 'train_s',
