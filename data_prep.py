@@ -67,7 +67,7 @@ def read_mixed_from_files(dpath, dlist, pickle_file=None):
             print "Warning: can't read {}, switch to backup reader". \
                 format(fpath)
             data = backup_wavfile_reader(fpath).T
-        res[i] = data
+        res[i] = np.float32(data)
     if pickle_file is not None:
         with open(pickle_file, 'w') as f:
             cPickle.dump(res, f)
