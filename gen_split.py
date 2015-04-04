@@ -161,7 +161,7 @@ def build_train_test_set(train, test, all_instruments, rare_instr):
     train_data['train_p'] = np.hstack([train_data['train_p'][:, nonrare_index],
                                        np.zeros((len(temp), 1),
                                                 dtype='float32')])
-    print 'training set shape'.format(train_data['train_y'].shape)
+    print 'training set shape: {}'.format(train_data['train_y'].shape)
     savemat(os.path.join('data', 'train.mat'), train_data)
     del train_data
     print 'finished building training set'
