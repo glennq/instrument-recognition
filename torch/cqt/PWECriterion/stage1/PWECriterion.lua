@@ -32,7 +32,9 @@ function PWECriterion:updateGradInput(input, target)
    local lsize = target:sum()
    local nlsize = target:size(1) - lsize
    if lsize * nlsize == 0 then
-      self.output = 0
+      self.gradInput = temp.new()
+      self.gradInput:resizeAs(input)
+      self.gradInput:fill(0)
    else
       local mat = torch.zeros(lsize, nlsize):float()
       input = input:float()
