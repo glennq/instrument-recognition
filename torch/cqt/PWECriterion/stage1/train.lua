@@ -43,11 +43,14 @@ function get_rank_loss(output, target)
 	 table.insert(neg, k)
       end
    end
+   if #pos == 0 or #neg == 0 then
+      return 0
+   end
    for k = 1, #pos do
       for kk = 1, #neg do
 	 if output[pos[k]] <= output[neg[kk]] then
 	        loss = loss + 1
-		 end
+         end
       end
    end
    loss = loss / #pos / #neg
@@ -239,7 +242,7 @@ function test()
    end
    
    tloss = tloss / testData.size
-   tkloss = tkloss / testData.size
+   rkloss = rkloss / testData.size
    -- timing
    time = sys.clock() - time
    time = time / testData.size
