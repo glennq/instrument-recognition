@@ -113,12 +113,12 @@ function train()
                        for i = 1,#inputs do
                           -- estimate f
                           local output = model:forward(inputs[i])
-                          local err = criterion:forward(output, targets[i])
+                          local err = criterion:forward(output, targets[i]:ge(0.5))
                           f = f + err
-			  rkloss = rkloss + get_rank_loss(output:float(), targets[i]:float())
+			  rkloss = rkloss + get_rank_loss(output:float(), targets[i]:ge(0.5):float())
 			  
                           -- estimate df/dW
-                          local df_do = criterion:backward(output, targets[i])
+                          local df_do = criterion:backward(output, targets[i]:ge(0.5))
                           model:backward(inputs[i], df_do)
 
                           -- update confusion
@@ -217,9 +217,9 @@ function test()
       end
       -- test sample
       local pred = model:forward(input)
-      local loss = criterion:forward(pred, target)
+      local loss = criterion:forward(pred, target:ge(0.5))
       tloss = tloss + loss
-      rkloss = rkloss + get_rank_loss(pred:float(), target:float())
+      rkloss = rkloss + get_rank_loss(pred:float(), target:ge(0.5):float())
       local temp = pred:ge(0.5):eq(target:ge(0.5))
       correct = correct + temp:sum()
       if temp:sum() == noutputs then
