@@ -34,7 +34,7 @@ def inputData():
 if __name__ == '__main__':
     with open('song_instr.pkl', 'rb') as f:
         song_instr_map = cPickle.load(f)
-    groups = pd.read_csv(os.path.join(os.pardir, 'instGroup.csv'),
+    groups = pd.read_csv(os.path.join(os.pardir, 'data', 'instGroup.csv'),
                          index_col=0)
     grouping = []
     for i in range(1, groups.shape[1]):
