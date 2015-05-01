@@ -11,7 +11,7 @@ def do_mfcc_d_d2(X, sr=44100):
         mfccs = librosa.feature.mfcc(y=y, sr=sr)
         delta1 = librosa.feature.delta(mfccs)
         delta2 = librosa.feature.delta(mfccs, order=2)
-        res.append(np.hstack([mfccs, delta1, delta2]))
+        res.append(np.vstack([mfccs, delta1, delta2]))
     return np.array(res, dtype='float32')
 
 
