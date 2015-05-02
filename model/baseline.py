@@ -4,13 +4,13 @@ from sklearn.svm import SVC
 from scipy.io import loadmat
 
 
-def train(X, y):
+def do_train(X, y):
     clf = OneVsRestClassifier(SVC(kernel='linear'), -1)
     clf.fit(X, y)
     return clf
 
 
-def test(clf, X, y, p, savename):
+def do_test(clf, X, y, p, savename):
     pred = clf.predict(X)
     accu = (pred == y).mean()
     exact_accu = sum([((y[i] == e).sum() == y.shape[1])
@@ -35,9 +35,9 @@ def main():
     test = loadmat('/scratch/jq401/ml-mat-split-3943485/test.mat')
     train['y'] = np.float32(train['y'] > 0.5)
     test['y'] = np.float32(test['y'] > 0.5)
-    clf = train(train['X'], train['y'])
-    test(clf, train['X'], train['y'], train['p'], 'train.log')
-    test(clf, test['X'], test['y'], test['p'], 'test.log')
+    clf = do_train(train['X'], train['y'])
+    do_test(clf, train['X'], train['y'], train['p'], 'train.log')
+    do_test(clf, test['X'], test['y'], test['p'], 'test.log')
 
 
 if __name__ == '__main__':
