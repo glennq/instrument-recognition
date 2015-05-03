@@ -2,22 +2,29 @@ require 'torch'   -- torch
 require 'nn'      -- provides all sorts of trainable modules/layers
 require 'cunn'
 
-noutputs = 82
+noutputs = 11
 batchSize = 16
 
 -- input dimensions
-nfeats = 2
+nfeats = nfeats or 2
 length = 44100
 ninputs = nfeats*length
 
 -- hidden units, filter sizes (for ConvNet only):
-nstates = {64,64,128,400}
-filtsize = {401, 435, 49}
-poolsize = {16, 12, 8}
-stridesize = {8, 6, 4}
-viewsize = 196
+nstates = {256,384,384,400}
+filtsize = {3101, 300, 20}
+--filtsize2 = {31, 21, 13} 
+poolsize = {40, 30, 8}
+stridesize = {20, 20, 4}
+--poolsize2 = {4, 4, 4}
+--stridesize2 = {2, 2, 2}
+viewsize = 16
+--viewsize2 = 6
 
 print '==> construct model'
+
+--model = torch.load('/scratch/jq401/run-3939766/model.net')
+
 
 model = nn.Sequential()
 

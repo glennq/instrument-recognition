@@ -6,12 +6,12 @@ print '==> configuring optimizer'
 
 
 save = '.'
-maxEpoch = 400
+maxEpoch = 500
 
 optimState = {
-   learningRate = 0.05,
-   momentum = 0.95,
-   learningRateDecay = 0.00001
+   learningRate = 0.07,
+   momentum = 0.9,
+   learningRateDecay = 0.00008
 }
 optimMethod = optim.sgd
 
@@ -27,93 +27,35 @@ if opt.type == 'cuda' then
   criterion:cuda()
 end
 
-classes = {'Main System',
- 'accordion',
- 'acoustic guitar',
- 'alto saxophone',
- 'auxiliary percussion',
- 'bamboo flute',
- 'banjo',
- 'baritone saxophone',
- 'bass clarinet',
- 'bass drum',
- 'bassoon',
- 'bongo',
- 'brass section',
- 'cello',
- 'cello section',
- 'chimes',
- 'claps',
- 'clarinet',
- 'clarinet section',
- 'clean electric guitar',
- 'cymbal',
- 'darbuka',
- 'distorted electric guitar',
- 'dizi',
- 'double bass',
- 'doumbek',
- 'drum machine',
- 'drum set',
- 'electric bass',
- 'electric piano',
- 'erhu',
- 'female singer',
- 'flute',
- 'flute section',
- 'french horn',
- 'french horn section',
- 'fx/processed sound',
- 'glockenspiel',
- 'gong',
- 'gu',
- 'guzheng',
- 'harmonica',
- 'harp',
- 'horn section',
- 'kick drum',
- 'lap steel guitar',
- 'liuqin',
- 'male rapper',
- 'male singer',
- 'male speaker',
- 'mandolin',
- 'melodica',
- 'oboe',
- 'oud',
- 'piano',
- 'piccolo',
- 'sampler',
- 'scratches',
- 'shaker',
- 'snare drum',
- 'soprano saxophone',
- 'string section',
- 'synthesizer',
- 'tabla',
- 'tack piano',
- 'tambourine',
- 'tenor saxophone',
- 'timpani',
- 'toms',
- 'trombone',
- 'trombone section',
- 'trumpet',
- 'trumpet section',
- 'tuba',
- 'vibraphone',
- 'viola',
- 'viola section',
- 'violin',
- 'violin section',
- 'vocalists',
- 'yangqin',
- 'zhongruan'}
-
 print '==> defining training procedure'
 parameters, gradParameters = model:getParameters()
 tr_sum = trainData.present:sum()
 te_sum = testData.present:sum()
+
+function get_rank_loss(output, target)
+   local pos = {}
+   local neg = {}
+   local loss = 0
+   for k = 1, target:size(1) do
+      if target[k] >= 1 then
+	 table.insert(pos, output[k])
+      else
+	 table.insert(neg, output[k])
+      end
+   end
+   if #pos == 0 or #neg == 0 then
+      return 0
+   end
+   for k = 1, #pos do
+      for kk = 1, #neg do
+	 if pos[k] <= neg[kk] then
+	        loss = loss + 1
+	 end
+      end
+   end
+   loss = loss / #pos / #neg
+   return loss
+end
 
 function train()
    shuffle = torch.randperm(trsize)
@@ -127,6 +69,7 @@ function train()
    model:training()
 
    local tloss = 0
+--   local rkloss = 0
    local correct = 0
    local n_correct = 0
    local exact_correct = 0
@@ -135,7 +78,7 @@ function train()
    print("==> online epoch # " .. epoch .. ' [batchSize = ' .. batchSize .. ']')
    for t = 1,trainData.size,batchSize do
       -- disp progress
-      xlua.progress(t, trainData.size)
+--      xlua.progress(t, trainData.size)
 
       -- create mini batch
       local inputs = {}
@@ -173,12 +116,12 @@ function train()
                        for i = 1,#inputs do
                           -- estimate f
                           local output = model:forward(inputs[i])
-                          local err = criterion:forward(output, targets[i])
+                          local err = criterion:forward(output, targets[i]:ge(0.5))
                           f = f + err
+--			  rkloss = rkloss + get_rank_loss(output:float(), targets[i]:ge(0.5):float())
 			  
-
                           -- estimate df/dW
-                          local df_do = criterion:backward(output, targets[i])
+                          local df_do = criterion:backward(output, targets[i]:ge(0.5))
                           model:backward(inputs[i], df_do)
 
                           -- update confusion
@@ -205,6 +148,7 @@ function train()
    end
    -- time taken
    tloss = tloss / trainData.size
+--   rkloss = rkloss / trainData.size
    time = sys.clock() - time
    time = time / trainData.size
 
@@ -217,16 +161,22 @@ function train()
    print(exact_correct / trainData.size * 100)
    print("\n==>training loss")
    print(tloss)
+  -- print('\n==> training rank loss')
+   --print(rkloss)
 
    -- update logger/plot
-   trainLogger:add{['% class accuracy (train set)'] = correct / trainData.size / noutputs * 100, ['training loss'] = tloss, ['% modified accuracy (train set)'] = n_correct / tr_sum * 100, ['training exact match accuracy %'] = exact_correct / trainData.size * 100}
+   trainLogger:add{['% class accuracy (train set)'] = correct / trainData.size / noutputs * 100,
+		   ['training loss'] = tloss,
+		   ['% modified accuracy (train set)'] = n_correct / tr_sum * 100, 
+		   ['training exact match accuracy %'] = exact_correct / trainData.size * 100}
 
    -- save/log current net
-   local filename = paths.concat(save, 'model.net')
-   os.execute('mkdir -p ' .. sys.dirname(filename))
-   print('==> saving model to '..filename)
-   torch.save(filename, model)
-
+   if epoch % 2 == 0 then
+      local filename = paths.concat(save, 'model.net')
+      os.execute('mkdir -p ' .. sys.dirname(filename))
+      print('==> saving model to '..filename)
+      torch.save(filename, model)
+   end
    -- next epoch
    epoch = epoch + 1
 end
@@ -245,14 +195,21 @@ function test()
    print('==> testing on test set:')
 
    local tloss = 0
+   local rkloss = 0
    local correct = 0
    local n_correct = 0
    local exact_correct = 0
+   local n_tp = 0
+   local n_pred = 0
+   local n_pos = 0
+   local f_mac_tp = torch.Tensor(noutputs):zero():float()
+   local f_mac_pred = torch.Tensor(noutputs):zero():float()
+   local f_mac_pos = torch.Tensor(noutputs):zero():float()
 
       -- disp progress
    for t = 1,testData.size do
       -- disp progress
-      xlua.progress(t, testData.size)
+--      xlua.progress(t, testData.size)
 
       local input = testData.data[t]
       local target = testData.labels[t]
@@ -264,14 +221,21 @@ function test()
       end
       -- test sample
       local pred = model:forward(input)
-      local loss = criterion:forward(pred, target)
+      local loss = criterion:forward(pred, target:ge(0.5))
       tloss = tloss + loss
+      rkloss = rkloss + get_rank_loss(pred:float(), target:ge(0.5):float())
       local temp = pred:ge(0.5):eq(target:ge(0.5))
       correct = correct + temp:sum()
       if temp:sum() == noutputs then
 	 exact_correct = exact_correct + 1
       end
       n_correct = n_correct + temp:cmul(present):sum()
+      f_mac_tp:add(pred:ge(0.5):cmul(target:ge(0.5)):float())
+      f_mac_pos:add(target:ge(0.5):float())
+      f_mac_pred:add(pred:ge(0.5):float())
+      n_tp = n_tp + pred:ge(0.5):cmul(target:ge(0.5)):sum()
+      n_pred = n_pred + pred:ge(0.5):sum()
+      n_pos = n_pos + target:ge(0.5):sum()
       -- a more agressive modified accuracy as follows:
       -- n_correct = n_correct + present:sum() - pred:ge(0.5):eq(target:le(0.5)):sum()
       -- print("\n" .. target .. "\n")
@@ -279,6 +243,7 @@ function test()
    end
    
    tloss = tloss / testData.size
+   rkloss = rkloss / testData.size
    -- timing
    time = sys.clock() - time
    time = time / testData.size
@@ -293,9 +258,31 @@ function test()
    print(exact_correct / testData.size * 100)
    print('\ntest loss:')
    print(tloss)
-
+   print('\ntest rank loss:')
+   print(rkloss)
+   print('\ntest precision:')
+   print(n_tp / n_pred)
+   print('\ntest recall:')
+   print(n_tp / n_pos)
+   print('\ntest F micro')
+   print(2 * n_tp / (n_pred + n_pos))
+   print('\ntest F macro')
+   f_mac_pos:add(f_mac_pred)
+   local tt = 0
+   local cnt = 0
+   for i=1,(#f_mac_tp)[1] do
+      if f_mac_pos[i] > 0 then
+         cnt = cnt + 1
+         tt = tt + f_mac_tp[i] / f_mac_pos[i]
+      end
+   end
+   print(tt * 2 / cnt)
    -- update log/plot
-   testLogger:add{['% mean class accuracy (test set)'] = correct / testData.size / noutputs * 100, ['test loss'] = tloss, ['test modified accuracy %'] = n_correct / te_sum * 100, ['test exact match accuracy %'] = exact_correct / testData.size * 100}   
+   testLogger:add{['% mean class accuracy (test set)'] = correct / testData.size / noutputs * 100,
+		  ['test loss'] = tloss, ['test modified accuracy %'] = n_correct / te_sum * 100, ['test ranking loss'] = rkloss,
+		  ['test exact match accuracy %'] = exact_correct / testData.size * 100,
+		  ['test precision'] = n_tp / n_pred, ['test recall'] = n_tp / n_pos,
+		  ['test F micro'] = 2 * n_tp / (n_pred + n_pos), ['test F macro'] = (tt * 2 / cnt)}   
    -- next iteration:
 
 end
