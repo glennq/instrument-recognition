@@ -11,10 +11,9 @@ torch.setdefaulttensortype('torch.FloatTensor')
 
 print '==> executing all'
 
-dofile '/home/jq401/ml_project/code9_mfcc_temporal/data.lua'
-dofile '/home/jq401/ml_project/code9_mfcc_temporal/PWECriterion.lua'
-dofile '/home/jq401/ml_project/code9_mfcc_temporal/model.lua'
-dofile '/home/jq401/ml_project/code9_mfcc_temporal/train.lua'
+dofile 'data.lua'
+dofile 'model.lua'
+dofile 'train.lua'
 
 epoch = 1
 

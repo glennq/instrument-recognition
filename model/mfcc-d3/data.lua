@@ -1,8 +1,8 @@
 require 'torch'
 
 torch.setdefaulttensortype('torch.FloatTensor')
-tr_file = '/scratch/jq401/ml-mat-split-3943485/train.t7'
-te_file = '/scratch/jq401/ml-mat-split-3943485/test.t7'
+tr_file = 'train.t7'
+te_file = 'test.t7'
 
 print '==> loading dataset'
 
