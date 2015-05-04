@@ -1,0 +1,34 @@
+* Project Report
+** Introduction
+- Motivation
+- Previous works
+** Problem Definition
+- Input format
+- Output format
+** Model Designs
+*** Features
+- MFCC(+delta)
+- cqt(+delta)
+- raw input
+*** Convnet
+Based on features mentioned above
+*** Baseline
+- MFCC + delta1 + delta2 -> Fit Gaussian -> Parameters -> features -> One vs All logistic regression
+*** Evaluation metrics
+- Accuracy
+- F-micro
+- F-macro
+** Experiments
+*** Dataset
+- Format
+- Summary
+*** Label Generation
+- From activations to label
+*** Training procedures
+**** Dataset split
+**** Preprocessing
+- Channel-wise global normalization
+**** Convnet Architecture
+*** Result
+*** Discussion
+** Conlusion
