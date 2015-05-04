@@ -88,15 +88,16 @@ def do_split(X, label_mapping, kwargs):
         label_mapping (dict):
         kwargs (dict): arguments to pass to multi_label_stratif
     Returns:
-        train (list): list of song names in training set
-        test (list): list of song names in test set
+        datasets (list of list): each inner list contains song names
+                                 corresponding dataset
     """
     y = [list(label_mapping[i]) for i in X]
-    train_i, test_i = multi_label_stratif.multi_label_stratif(y, **kwargs)
+    datasets_i = multi_label_stratif.multi_label_stratif(y, **kwargs)
     X = np.array(X, dtype=object)
-    train = X[train_i]
-    test = X[test_i]
-    return train, test
+    datasets = []
+    for i in datasets_i:
+        datasets.append(list(X[i]))
+    return datasets
 
 
 def get_instr_count(song_names, label_mapping):
@@ -107,11 +108,11 @@ def get_instr_count(song_names, label_mapping):
     return cnt
 
 
-def build_train_test_set(train, test, all_instruments, rare_instr):
+def build_train_test_set(datasets, all_instruments, rare_instr):
     """Build training and test set files from data file for individual songs
     Args:
-        train (list): as returned from do_split
-        test (list): as returned from do_split
+        datasets (list of list): each inner list contains song names
+                                 corresponding dataset
     """
     # get indices for rare instruments
     rare_index = [i for i, e in enumerate(all_instruments) if e in rare_instr]
@@ -119,52 +120,32 @@ def build_train_test_set(train, test, all_instruments, rare_instr):
                      if e not in rare_instr]
     print 'Number of nonrare instruments = {}'.format(len(nonrare_index))
 
-    # initialize
-    train_data = [[], [], [], [], []]
-    test_data = [[], [], [], [], []]
+    print '{} datasets to build'.format(len(datasets))
 
-    # build test set
-    for i in test:
-        data = loadmat(os.path.join('data', '{}_patched.mat'.format(i)))
-        for j, e in enumerate(['X', 'y', 'present', 'song_name', 'time']):
-            test_data[j].append(np.float32(data[e]))
-        del data
-    test_data = [np.vstack(i) for i in test_data]
-    test_data = dict(zip(['test_X', 'test_y', 'test_p', 'test_s', 'test_t'],
-                         test_data))
-    # deal with OTHER instruments
-    temp = test_data['test_y'][:, nonrare_index]
-    test_data['test_y'] = np.hstack([temp, test_data['test_y'][:, rare_index].
-                                     max(1).reshape(len(temp), 1)])
-    test_data['test_p'] = np.hstack([test_data['test_p'][:, nonrare_index],
-                                     np.zeros((len(temp), 1),
-                                              dtype='float32')])
-    print 'test set shape: {}'.format(test_data['test_y'].shape)
-    savemat(os.path.join('data', 'test.mat'), test_data)
-    del test_data
-    print 'finished building test set'
+    for k, elm in enumerate(datasets):
+        # initialize
+        data = [[], [], [], [], []]
 
-    # build training set
-    for i in train:
-        data = loadmat(os.path.join('data', '{}_patched.mat'.format(i)))
-        for j, e in enumerate(['X', 'y', 'present', 'song_name', 'time']):
-            train_data[j].append(np.float32(data[e]))
+        # build test set
+        for i in elm:
+            data_read = loadmat('{}_patched.mat'.format(i))
+            for j, e in enumerate(['X', 'y', 'present', 'song_name', 'time']):
+                data[j].append(np.float32(data_read[e]))
+            del data_read
+        data = [np.vstack(i) for i in data]
+        data = dict(zip(['X', 'y', 'p', 's', 't'],
+                        data))
+        # deal with OTHER instruments
+        temp = data['y'][:, nonrare_index]
+        data['y'] = np.hstack([temp, data['y'][:, rare_index].
+                               max(1).reshape(len(temp), 1)])
+        data['p'] = np.hstack([data['p'][:, nonrare_index],
+                               np.zeros((len(temp), 1),
+                                        dtype='float32')])
+        print 'test set shape: {}'.format(data['y'].shape)
+        savemat('dataset_{}.mat'.format(k), data)
         del data
-    train_data = [np.vstack(i) for i in train_data]
-    train_data = dict(zip(['train_X', 'train_y', 'train_p', 'train_s',
-                           'train_t'], train_data))
-    # deal with OTHER instruments
-    temp = train_data['train_y'][:, nonrare_index]
-    train_data['train_y'] = np.hstack([temp,
-                                       train_data['train_y'][:, rare_index].
-                                       max(1).reshape(len(temp), 1)])
-    train_data['train_p'] = np.hstack([train_data['train_p'][:, nonrare_index],
-                                       np.zeros((len(temp), 1),
-                                                dtype='float32')])
-    print 'training set shape: {}'.format(train_data['train_y'].shape)
-    savemat(os.path.join('data', 'train.mat'), train_data)
-    del train_data
-    print 'finished building training set'
+        print 'finished building data set {}'.format(k)
 
 
 def generate_split(groupID, rare_thres, songs_to_split=None, start_song=0,
@@ -199,18 +180,15 @@ def generate_split(groupID, rare_thres, songs_to_split=None, start_song=0,
     label_mapping = replace_with_grouping(label_mapping, grouping)
     rare_instr = get_rare_instr(label_mapping, all_instruments, rare_thres)
     replace_rare(label_mapping, rare_instr)
-    train, test = do_split(song_name_list, label_mapping, kwargs_split)
-    with open('train_songs.txt', 'wb') as f:
-        f.write('\n'.join(train))
-    with open('test_songs.txt', 'wb') as f:
-        f.write('\n'.join(test))
-    train_cnt = [str(i) for i in get_instr_count(train, label_mapping).items()]
-    with open('train_instr_distr.txt', 'wb') as f:
-        f.write('\n'.join(train_cnt))
-    test_cnt = [str(i) for i in get_instr_count(test, label_mapping).items()]
-    with open('test_instr_distr.txt', 'wb') as f:
-        f.write('\n'.join(test_cnt))
-    build_train_test_set(train, test, all_instruments, rare_instr)
+    datasets = do_split(song_name_list, label_mapping, kwargs_split)
+    for idx, e in datasets:
+        with open('dataset_{}_songs.txt'.format(idx), 'wb') as f:
+            f.write('\n'.join(e))
+        dataset_cnt = [str(i) for i in
+                       get_instr_count(e, label_mapping).items()]
+        with open('dataset_{}_instr_distr.txt'.format(idx), 'wb') as f:
+            f.write('\n'.join(dataset_cnt))
+    build_train_test_set(datasets, all_instruments, rare_instr)
 
 
 def main():
