@@ -14,7 +14,7 @@ def do_test(clf, X, y, p, savename):
     pred = clf.predict(X)
     accu = (pred == y).mean()
     exact_accu = sum([((y[i] == e).sum() == y.shape[1])
-                      for i, e in enumerate(pred)]) / len(y)
+                      for i, e in enumerate(pred)]) / float(len(y))
     mod_accu = ((pred == y) * p).mean()
     all_precision = (pred * y).sum() / pred.sum()
     all_recall = (pred * y).sum() / y.sum()
