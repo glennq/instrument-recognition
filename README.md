@@ -1,4 +1,4 @@
-# Instrument Recognition in Polyphonic Music
+# Automatic Instrument Identification in Polyphonic Music
 
 Course project for DS-GA1003 Machine Learning.
 
