@@ -26,7 +26,9 @@ def inputData():
                 if instr not in counted:
                     instr_cnt[instr] = instr_cnt.get(instr, 0) + 1
                 counted.add(instr)
-        flash('Intrument counts:')
+        del instr_cnt['S07']
+        flash('Intrument counts: (in total {} instruments)'.
+              format(len(instr_cnt)))
         for k, v in sorted(instr_cnt.items(), key=lambda x: x[1]):
             flash('{}:\t{}'.format(k, v))
     return render_template('form.html', form=form)
