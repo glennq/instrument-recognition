@@ -177,7 +177,8 @@ def match_meta_annotation(meta, annotation):
 
 
 def split_music_to_patches(data, annotation, inst_map, label_aggr, length=1,
-                           time_window=100.0, binary=False, threshold=None):
+                           sr=44100, time_window=100.0, binary=False,
+                           threshold=None):
     """Split each music file into (length) second patches and label each patch
 
     Note: for each music file, the last patch that is not long enough is
@@ -193,6 +194,7 @@ def split_music_to_patches(data, annotation, inst_map, label_aggr, length=1,
         label_aggr(function): a function that defines the way labels for each
                               sample chunk is generated, default is np.mean
         length(int): length of each patch, in seconds
+        sr (int): sample rate of raw audio
         time_window(float): time windows for average (in milliseconds)
     Returns:
         dict: {'X': np array for X, 'y': np array for y, 'present': np array
@@ -200,7 +202,7 @@ def split_music_to_patches(data, annotation, inst_map, label_aggr, length=1,
                 track from which the patch is taken}
     """
     res = []
-    patch_size = 44100 * length
+    patch_size = sr * length
     for k, v in data.items():
         for i, e in enumerate(xrange(0, v.shape[1] - patch_size, patch_size)):
             patch = v[:, e:patch_size+e].ravel()
@@ -265,6 +267,13 @@ def prep_data(in_path, out_path=os.curdir, save_size=20, norm_channel=False,
     if not os.path.exists(anno_pkl):
         with open(anno_pkl, 'w') as f:
             cPickle.dump(annotation, f)
+
+    # create and save song_instr mapping
+    song_instr = {}
+    for k, v in annotation.items():
+        song_instr[k] = set(v.columns[1:])
+    with open(os.path.join(out_path, 'song_instr.pkl'), 'wb') as f:
+        cPickle.dump(song_instr, f)
 
     # save all instrument list to file
     with open('all_instruments.txt', 'wb') as f:
