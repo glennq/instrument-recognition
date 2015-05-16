@@ -186,7 +186,7 @@ def generate_split(groupID, rare_thres, songs_to_split=None, start_song=0,
     rare_instr = get_rare_instr(label_mapping, all_instruments, rare_thres)
     replace_rare(label_mapping, rare_instr)
     datasets = do_split(song_name_list, label_mapping, kwargs_split)
-    for idx, e in datasets:
+    for idx, e in enumerate(datasets):
         with open('dataset_{}_songs.txt'.format(idx), 'wb') as f:
             f.write('\n'.join(e))
         dataset_cnt = [str(i) for i in
