@@ -5,6 +5,8 @@ tr_file = 'train.t7'
 te_file = 'test.t7'
 
 print '==> loading dataset'
+print('==> training file: '..tr_file)
+print('==> test file: '..te_file)
 
 nfeats = 2
 

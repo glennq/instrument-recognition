@@ -267,16 +267,24 @@ function test()
    print('\ntest F micro')
    print(2 * n_tp / (n_pred + n_pos))
    print('\ntest F macro')
+   local instr_f_measures = {}
    f_mac_pos:add(f_mac_pred)
    local tt = 0
    local cnt = 0
    for i=1,(#f_mac_tp)[1] do
       if f_mac_pos[i] > 0 then
          cnt = cnt + 1
-         tt = tt + f_mac_tp[i] / f_mac_pos[i]
+         instr_f_measures[i] = 2 * f_mac_tp[i] / f_mac_pos[i]
+         tt = tt + instr_f_measures[i]
+      else
+         instr_f_measures[i] = 0
       end
    end
-   print(tt * 2 / cnt)
+   print(tt / cnt)
+   print('\ntest F for each instrument:')
+   for k, v in pairs(instr_f_measures) do
+      print(instruments[k]..': '..v)
+   end
    -- update log/plot
    testLogger:add{['% mean class accuracy (test set)'] = correct / testData.size / noutputs * 100,
 		  ['test loss'] = tloss, ['test modified accuracy %'] = n_correct / te_sum * 100, ['test ranking loss'] = rkloss,
