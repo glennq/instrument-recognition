@@ -120,6 +120,11 @@ def build_train_test_set(datasets, all_instruments, rare_instr):
                      if e not in rare_instr]
     print 'Number of nonrare instruments = {}'.format(len(nonrare_index))
 
+    nonrare_instr = [i for i in all_instruments if i not in rare_instr]
+    print 'Nonrare instruments are {}'.format(nonrare_instr)
+    with open('nonrare_instr.txt', 'wb') as f:
+        f.write('\n'.join(nonrare_instr))
+
     print '{} datasets to build'.format(len(datasets))
 
     for k, elm in enumerate(datasets):
@@ -192,4 +197,4 @@ def generate_split(groupID, rare_thres, songs_to_split=None, start_song=0,
 
 
 def main():
-    generate_split(4, 4)
+    generate_split(4, 20)
