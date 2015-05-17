@@ -4,6 +4,7 @@ require 'optim'   -- an optimization package, for online and batch methods
 
 print '==> configuring optimizer'
 
+instruments = {'acoustic guitar', 'clean electric guitar', 'distorted electric guitar', 'drum set', 'electric bass', 'fx/processed sound', 'piano', 'synthesizer', 'violin', 'voice', 'OTHER'}
 
 save = '.'
 maxEpoch = 500
